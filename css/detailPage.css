@@ -1,0 +1,89 @@
+
+#detailPage_img{
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+  padding: 10px;
+}
+#detailPage_img div{
+  width: 100%;
+  height: 100%;
+  background: #d9d9d9;
+}
+#yaungjojang_info_div{
+  padding: 10px;
+}
+#yaungjojang_info_div_div{
+  display: flex;
+  justify-content: space-between;
+}
+#detailPage_jjim{
+  display: flex;
+  background: #d9d9d9;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+}
+.detailPage_info{
+  display: flex;
+  justify-content: space-between;
+  
+
+}
+#detailPage_Cheheom{
+  margin-top: 20px;
+
+}
+#detailPage_Cheheom_div{
+  display: flex;
+  width: 100%;
+  gap: 20px;
+
+}
+#detailPage_Cheheom_div div:nth-child(1){
+  width: 50%;
+  height: 150px;
+  background: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#detailPage_Cheheom_div div:nth-child(2){
+  height: 150px;
+  width: 50%;
+}
+#detailPage_button{
+  width: 140px;
+  height: 30px;
+  background: #d9d9d9;
+  border-radius: 10px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#detailPage_suljeongbo_main_div{
+  display: flex;
+  overflow-x: scroll;
+}
+.detailPage_gap{
+  margin-top: 5px;
+}
+.detailPage_suljeongbo{
+  display: flex;
+  width: 70%;
+  height: 180px;
+  gap: 10px;
+}
+#detailPage_suljeongbo_img{
+  height: 100%;
+  background: #d9d9d9;
+  width: 50%;
+}
+#detailPage_suljeongbo_text{
+  width: 50%;
+}
+#sul{
+  margin-top: 20px;
+}
