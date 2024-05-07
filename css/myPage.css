@@ -1,0 +1,48 @@
+#myPage_welcome{
+  width: 100%;
+  height: 150px;
+  padding: 5px;
+}
+#myPage_welcome_div{
+  width: 100%;
+  height: 100%;
+  background: #d9d9d9;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#myPage_info{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+#myPage_info_info{
+  display: flex;
+  justify-content: space-between;
+}
+#myPage_info_info_user{
+  display: flex;
+}
+#myPage_img_article{
+  display: flex;
+  gap: 20px;
+}
+#myPage_img_box{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background: #d9d9d9;
+}
+#myPage_img_box img{
+  width: 50px; 
+  object-fit: cover;
+}
+#myPage_img_box div{
+  display: flex;
+}
+#img_cul{
+  display: flex;
+  justify-content: space-between;
+}

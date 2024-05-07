@@ -1,0 +1,24 @@
+#stampPage_region{
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  
+}
+#stampPage_region div{
+  background: #d9d9d9;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.grid-item {
+  background-color: #ddd;
+  padding: 52px;
+  text-align: center;
+  border-radius: 50%;
+}
