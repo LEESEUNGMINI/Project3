@@ -1,9 +1,12 @@
 import "dotenv/config.js";
 import express from 'express';
 import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage } from './controller/webContorller.js';
+import { joinUser } from "./controller/authController.js";
 
 
 const app = express();
+// JSON 형식 변환 미들웨어
+app.use(express.json());
 
 // EJS 템플릿 엔진 설정
 app.set("view engine", "ejs");
@@ -23,8 +26,9 @@ app.get('/stampPage', stampPage);
 app.get('/login', login);
 app.get('/sign', sign);
 // api
+app.post("/api/join", joinUser);
 // 서버 시작
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port http://localhost:${PORT}`);
 });
