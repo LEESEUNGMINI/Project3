@@ -23,16 +23,14 @@
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  margin-top: 40px;
+  grid-gap: 15px;
+  margin-top: 0px;
+  padding: 30px 10px;
 }
-
 .grid-item {
   background-color: #ddd;
   width: 107px;
   height: 107px;
-  line-height: 107px;
-  margin: 0 auto;
   text-align: center;
   border-radius: 50%;
 }
