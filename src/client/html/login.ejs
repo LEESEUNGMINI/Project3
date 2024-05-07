@@ -9,7 +9,7 @@
       <!-- 로그인 폼 -->
       <div id="login-form">
         <h2>로그인</h2>
-        <form action="login.php" method="post"> <!-- 로그인 폼의 action과 method 설정 -->
+        <form action="" method="post"> <!-- 로그인 폼의 action과 method 설정 -->
           <div class="input-group">
             <label for="username">아이디</label>
             <input type="text" id="username" name="username" required>
@@ -23,8 +23,14 @@
         </form>
         <!-- 소셜 로그인 버튼 -->
         <div id="social-login">
-          <button class="social-button" id="kakao-login"><i class="fab fa-kakao"></i> Kakao Login</button>
-          <button class="social-button" id="google-login"><i class="fab fa-google"></i> Google Login</button>
+          <button class="social-button" id="naver-login">
+            <img src="../file/icon/btnG_아이콘사각.png" alt=""> 
+            <div>네이버 로그인</div>
+          </button>
+          <button class="social-button" id="kakao-login">
+            <img src="../file/icon/kakao.png" alt="">
+            <div>카카오 로그인</div>
+          </button>
         </div>
       </div>
     </div>

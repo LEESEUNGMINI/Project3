@@ -1,10 +1,20 @@
-#stampPage_region{
+.profile {
+  width: 128px;
+  height: 128px;
+  background: white;
+  border-radius: 50%;
+}
+.profile_img {
+  object-fit: cover;
+  object-position: center;
+  margin: 23px 26px;
+}
+#stampPage_region {
   display: flex;
   gap: 10px;
   padding: 10px;
-  
 }
-#stampPage_region div{
+#stampPage_region div {
   background: #d9d9d9;
   padding: 5px;
   border-radius: 10px;
@@ -14,11 +24,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
+  margin-top: 40px;
 }
 
 .grid-item {
   background-color: #ddd;
-  padding: 52px;
+  width: 107px;
+  height: 107px;
+  line-height: 107px;
+  margin: 0 auto;
   text-align: center;
   border-radius: 50%;
 }

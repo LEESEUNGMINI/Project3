@@ -5,9 +5,9 @@ body {
   height: 100vh;
   margin: 0;
 }
-h2{
-  margin-top: 50px;
-  margin-bottom: 50px;
+h2 {
+  margin-top: 146px;
+  margin-bottom: 86px;
 }
 
 #login-form {
@@ -25,6 +25,7 @@ h2{
 .input-group label {
   display: block;
   margin-bottom: 5px;
+  color: #900034;
 }
 
 .input-group input[type="text"],
@@ -39,14 +40,11 @@ button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  font-weight: bold;
+  font-size: 15px;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 #social-login {
@@ -57,20 +55,35 @@ button:hover {
 }
 
 .social-button {
-  display: inline-block;
-  margin-right: 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #eee;
-  color: #555;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  width: 300px;
+  height: 40px;
+  margin: 0 auto;
+  padding: 0;
+  color: black;
+}
+#naver-login {
+  background-color: #03c75a;
+  font-weight: bold;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.social-button img {
+  width: 35px;
+  height: 35px;
+}
+#kakao-login {
+  background-color: #fae100;
+  font-weight: bold;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
-.social-button:hover {
-  background-color: #ddd;
-}
 .input-group {
   display: flex;
   align-items: center;

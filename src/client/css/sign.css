@@ -5,14 +5,16 @@ body {
   height: 100vh;
   margin: 0;
 }
-h2{
-  margin-top: 50px;
-  margin-bottom: 50px;
+h2 {
+  margin-top: 146px;
+  margin-bottom: 86px;
+  font-weight: bold;
+  font-size: 40px;
+  color: #900034;
 }
-#sign_label{
+#sign_label {
   font-size: 10px;
 }
-
 
 #signup-form {
   text-align: center;
@@ -29,6 +31,8 @@ h2{
   flex: 1;
   margin-right: 10px;
   text-align: right;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .input-group input[type="text"],
@@ -37,7 +41,7 @@ h2{
   flex: 2;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #900034;
 }
 
 .input-group input[type="checkbox"] {
@@ -49,16 +53,13 @@ label[for="age-check"] {
 }
 
 button {
-  width: 100%;
-  padding: 10px 0;
+  display: inline-block;
+  width: 30%;
+  margin: 37px 0;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #900034;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
