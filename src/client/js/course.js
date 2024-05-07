@@ -55,3 +55,4 @@ const showCurrentLocation = async () => {
 
 // 위에서 정의한 함수를 사용하여 사용자의 현재 위치를 보여주는 코드
 showCurrentLocation();
+
