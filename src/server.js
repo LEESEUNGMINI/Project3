@@ -1,5 +1,7 @@
+import "dotenv/config.js";
 import express from 'express';
 import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage } from './controller/webContorller.js';
+
 
 const app = express();
 
@@ -20,8 +22,7 @@ app.get('/qrPage', qrPage);
 app.get('/stampPage', stampPage);
 app.get('/login', login);
 app.get('/sign', sign);
-
-
+// api
 // 서버 시작
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
