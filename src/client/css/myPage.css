@@ -1,3 +1,7 @@
+.wrap {
+  max-width: 406px;
+  margin: 0 auto;
+}
 #myPage_welcome {
   width: 100%;
   padding: 20px 12px;
@@ -10,18 +14,69 @@
   justify-content: space-around;
   align-items: center;
 }
+.logOut {
+  width: 125px;
+  height: 40px;
+  background-color: #900034;
+  color: white;
+  margin: 20px 0;
+}
+#myPage_welcome_div_left {
+  font-weight: bold;
+  font-size: 25px;
+}
+.profile {
+  width: 128px;
+  height: 128px;
+  background: white;
+  border-radius: 50%;
+}
+.profile_img {
+  object-fit: cover;
+  object-position: center;
+  margin: 23px 26px;
+}
+.myPage {
+  padding: 0 12px;
+}
+.myPage > h2 {
+  margin: 30px 0;
+}
 #myPage_info {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 10px;
 }
 #myPage_info_info {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #900034;
 }
 #myPage_info_info_user {
   display: flex;
+}
+#myPage_info_info_user img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  object-position: center;
+}
+.arrow {
+  width: 19px;
+  height: 10px;
+}
+#myPage_info_info_user button {
+  width: 95px;
+  height: 25px;
+  color: white;
+  font-size: 15px;
+  padding: 3px 0;
+  margin: 10px 0;
+}
+.myPage_info_info_user_profile {
+  font-size: 22px;
+  font-weight: bold;
 }
 #myPage_img_article {
   display: flex;

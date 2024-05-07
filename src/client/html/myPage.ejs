@@ -7,21 +7,23 @@
     <div id="guide">?</div>
   </header>
   <!-- 컨텐츠 --> 
-  <div>
+  <div class="wrap">
     <!-- ooo님 환영합니다 상단 -->
     <div id="myPage_welcome">
         <div id="myPage_welcome_div">
         <!-- 왼쪽 환영및 로그아웃 -->
         <div id="myPage_welcome_div_left">
-          <div>환영합니다</div>
-          <div>로그아웃</div>
+          <div>000님 환영합니다!</div>
+          <button class="logOut">로그아웃</button>
         </div>
         <!-- 오른쪽 프로필 이미지 -->
-        <div>프로필</div>
+        <div class="profile">
+          <img class="profile_img" src="../file/icon/profile.png">
+        </div>
       </div>
     </div>
     <!-- 나의 정보 -->
-    <div>
+    <section class="myPage">
       <h2>나의 정보</h2>
       <div id="myPage_info">
         <!-- 내 계정관리 및 정보 수정 -->
@@ -29,24 +31,24 @@
           <!-- 왼쪽 프로필 이미지 및 계정관리 -->
           <div>
             <div id="myPage_info_info_user">
-             <i class="fa-solid fa-user"></i>
+              <img src="../file/icon/profile2.png" alt="">
               <div>  
-                <div>내 계정관리</div>
-                <div>정보수정</div>
+                <div class="myPage_info_info_user_profile">내 계정관리</div>
+                <button>정보수정</button>
               </div>
             </div>
           </div>
           <!-- 오른쪽 arrow -->
-          <div>v</div>
+          <img class="arrow" src="../file/icon/arrow.png">
         </div>
         <!-- 나의 찜목록 -->
         <div id="myPage_info_info">
           <!-- 왼쪽 프로필 이미지 및 계정관리 -->
           <div>
             <div id="myPage_info_info_user">
-              <i class="fa-solid fa-heart"></i>
+              <img src="../file/icon/like.png" alt="">
               <div>  
-                <div>나의 찜목록</div>
+                <div class="myPage_info_info_user_profile">나의 찜목록</div>
                 <!-- 이미지목록 -->
                 <div id="myPage_img_article">
                   <!-- 이미지 박스 -->
@@ -87,7 +89,7 @@
             <div>v</div>
           </div>
       </div>
-    </div>
+    </section>
   </div>
   <%- include('common/footer.ejs') %>
   </div>
