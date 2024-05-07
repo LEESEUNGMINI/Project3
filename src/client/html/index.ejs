@@ -1,0 +1,69 @@
+
+  <%- include('common/header.ejs') %>
+  <div id="Main_div">
+    <!-- 메인 컨테이너 -->
+    <div id="container">
+      <!-- 헤더 나브 -->
+      <header>
+        <img src="../file/logo.png" alt="">
+        <div id="guide">?</div>
+      </header>
+      <!-- 배너부분 -->
+      <section id="carosel">
+        <!-- Slider main container -->
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://placeimg.com/640/480/any"></div>
+            <div class="swiper-slide"><img src="https://placeimg.com/640/480/any"></div>
+            <div class="swiper-slide"><img src="https://placeimg.com/640/480/any"></div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
+      <!-- 메인 컨텐츠 -->
+      <section id="main_contant">
+        <!-- 메인 타이틀 -->
+        <h2>원하는 지역을 선택해주세요</h2>
+        <!-- 지역 선택 동글이? -->
+        <div id="donggle">
+           <div class="area">서울/경기도</div>
+           <div class="area">충청도</div>
+           <div class="area">강원도</div>
+           <div class="area">전라도</div>
+           <div class="area">제주도</div>
+        </div>
+        <!-- 선택할수 있는 지도가 들어가는 공간 -->
+        <div id="mapSection">
+          zz
+        </div>
+        <div>zz</div>
+      </section>
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      loop: true,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+
+  </script>
+  <%- include('common/footer.ejs') %>
+</body>
+</html>
