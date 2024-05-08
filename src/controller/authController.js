@@ -67,3 +67,4 @@ export const loginUser = async (req, res) => {
     .status(200)
     .json({ status: "success", message: "로그인 성공", data: { accessToken } });
 };
+

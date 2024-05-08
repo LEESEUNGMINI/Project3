@@ -54,7 +54,7 @@ const loginFetch = async () => {
 };
 
 loginBtn.addEventListener("click", loginFetch);
-joinBtn.addEventListener("click", () => (window.location.href = "/join"));
+joinBtn.addEventListener("click", () => (window.location.href = "/sign"));
 
 const checkError = () => {
   const notFoundAccessTokenError = getParameterByName("error");
