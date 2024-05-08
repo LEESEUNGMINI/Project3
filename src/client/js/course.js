@@ -36,6 +36,7 @@ const clickCourseList = (e, courseNo) => {
     panTo(courseLatitude, courseLongitude);
     clickCourse = courseNo;
   }
+  console.log(courseNo);
 };
 
 // 마커를 그리는 함수
@@ -73,9 +74,21 @@ const addCourseMarker = (course) => {
   });
 }
 
+// 마커 찍기
 const setCourseMarker = () => {
+  const uniqueNames = {};
+  const uniqueData = [];
+
   for (let i = 0; i < courseData.length; i++) {
-    addCourseMarker(courseData[i]);
+    const courseName = courseData[i].course_name;
+    if (!uniqueNames[courseName] && courseName !== '공통이미지') {
+      uniqueNames[courseName] = true;
+      uniqueData.push(courseData[i]);
+    }
+  }
+  for (let i = 0; i < uniqueData.length; i++) {
+    // console.log(uniqueData[i]);
+    addCourseMarker(uniqueData[i]);
   }
 };
 
@@ -118,7 +131,7 @@ const configLocation = () => {
 // 네비게이션 바
 const makeCourseNaviHTML = (data) => {
   const courseWrap = document.getElementById("courseWrap");
-  // 중복제거
+  // 중복 제거
   const uniqueNames = {};
   const uniqueData = [];
 
@@ -129,7 +142,7 @@ const makeCourseNaviHTML = (data) => {
       uniqueData.push(data[i]);
     }
   }
-  console.log(uniqueData);
+  // console.log(uniqueData);
 
   let html = "";
   for (let i = 0; i < uniqueData.length; i++) {
@@ -153,7 +166,7 @@ const getCourseList = async () => {
   });
   const result = await response.json();
   const data = result.data;
-  console.log(data);
+  // console.log(data);
   courseData = data;
   // 결과가 나오면 함수 실행
   makeCourseNaviHTML(data);
