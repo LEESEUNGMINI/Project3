@@ -25,6 +25,14 @@ export const notNeededAuth = async (req, res, next) => {
     next();
   }
 };
+// export async function testFun(req, res, next){
+//   const QUERY = "SELECT * FROM users WHERE user_no = ?";
+//   const user = await db
+//   .execute(QUERY, [3])
+//   .then((result) => result[0][0]);
+// req.user = user;
+// next();
+// };
 
 // 2. 토큰 이있으면 유저정보 넣어줌, 없으면 통과안됨
 export const neededAuth = async (req, res, next) => {

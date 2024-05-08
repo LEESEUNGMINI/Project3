@@ -4,7 +4,6 @@ import db from "../config/db.js";
 
 export const joinUser = async (req, res) => {
   const { userId, userPassword, userName,userPhone,userEmail } = req.body;
-  console.log(req.body)
   // 1. userId가 중복인지 확인한다. (데이터베이스 찾아서) // CRUD R
   const QUERY1 = `SELECT user_no FROM users WHERE user_id = ?`;
   const existUser = await db
@@ -62,7 +61,6 @@ export const loginUser = async (req, res) => {
     process.env.JWT_SECRET_KEY,
     { expiresIn: process.env.JWT_EXPIRE }
   );
-  console.log(accessToken)
   res
     .status(200)
     .json({ status: "success", message: "로그인 성공", data: { accessToken } });

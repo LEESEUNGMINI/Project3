@@ -47,7 +47,7 @@ const loginFetch = async () => {
     alert("로그인 성공", "success");
     setTimeout(() => {
       window.location.href = "/";
-    }, 1000);
+    }, 50);
   } else {
     alert("로그인에 실패하셨습니다.", "error");
   }
