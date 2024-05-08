@@ -13,9 +13,8 @@
         <div id="myPage_welcome_div">
         <!-- 왼쪽 환영및 로그아웃 -->
         <div id="myPage_welcome_div_left">
-          <div>ooo의 스탬프현황</div>
-          <div>방문한 양조장 02/50</div>
-        </div>
+          <div id="stamp_hun">ooo의 스탬프현황</div>
+      </div>
         <!-- 오른쪽 프로필 이미지 -->
         <div class="profile">
           <img class="profile_img" src="../file/icon/profile.png">
@@ -46,5 +45,10 @@
   <%- include('common/footer.ejs') %>
   </div>
   </div>
+  <script>
+       const info = JSON.parse(localStorage.getItem("userData"));
+       const stam = document.getElementById("stamp_hun")
+       stam.innerHTML = `${info.user_id}님의 스탬프현황`
+  </script>
 </body>
 </html>

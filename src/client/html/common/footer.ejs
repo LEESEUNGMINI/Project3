@@ -45,7 +45,6 @@
           const userData = await response.json();
         localStorage.setItem("userData", JSON.stringify(userData));
         // 콘솔에 사용자 정보 출력
-        console.log("사용자 정보:", userData);
 
         const info = JSON.parse(localStorage.getItem("userData"));
         const u = document.getElementById("WelcomeUser");
@@ -53,7 +52,7 @@
 
         const logOut = document.getElementById("logOut");
         logOut.addEventListener("click", () => {
-          localStorage.removeItem("accessToken");
+          localStorage.removeItem('accessToken');
           localStorage.removeItem("userData"); // 사용자 데이터 제거
           window.location.href = "./";
           alert("로그아웃 성공");
