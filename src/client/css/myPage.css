@@ -77,6 +77,8 @@
 .myPage_info_info_user_profile {
   font-size: 22px;
   font-weight: bold;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 #myPage_img_article {
   display: flex;
@@ -88,6 +90,7 @@
   justify-content: center;
   align-items: center;
   background: #d9d9d9;
+  margin-bottom: 5px;
 }
 #myPage_img_box img {
   width: 50px;
