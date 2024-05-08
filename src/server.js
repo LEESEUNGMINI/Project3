@@ -52,7 +52,6 @@ app.get("/api/userinfo", async (req, res) => {
       .execute(QUERY, [decoded.no])
       .then((result) => result[0][0]);
     // 사용자 정보를 클라이언트로 전송
-    console.log(db,"db")
     res.json(user);
   } catch (error) {
     // 오류가 발생한 경우 클라이언트로 오류 응답 전송
