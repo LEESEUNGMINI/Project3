@@ -6,7 +6,7 @@ const getCourseList = async () => {
   console.log(data);
 
   const detailPageImg = document.querySelector("#detailPage_img");
-  detailPageImg.innerHTML = `<img src=${data[0]}.png alt="image" />`
+  detailPageImg.innerHTML = `<img src=${data[0]}.jpg alt="image" />`
 };
 getCourseList();
 
