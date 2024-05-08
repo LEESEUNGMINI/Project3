@@ -24,6 +24,9 @@
   border-radius: 10px;
   font-size: 12px;
 }
+#stamp_hun{
+  margin-bottom: 10px;
+}
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
