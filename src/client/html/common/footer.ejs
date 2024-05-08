@@ -13,7 +13,22 @@
           </div>
           <!-- 오른쪽 아이콘 -->
           <div class="footer_icon"><a href="./stampPage"><i class="fa-solid fa-stamp"></i></a></div>
-          <div class="footer_icon">
-            <a href="./myPage"><i class="fa-solid fa-user"></i></a></div>
+          <div id="loginA" class="footer_icon">
+            <a><i class="fa-solid fa-user"></i></a></div>
         </div>
       </footer>
+      <script>
+      const loginA = document.getElementById("loginA");
+  loginA.addEventListener("click", () => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      alert("토큰이 있습니다");
+      // 토큰이 있으면 myPage로 이동
+      window.location.href = "./myPage";
+    } else {
+      alert("토큰이 없습니다");
+      // 토큰이 없으면 로그인 페이지로 이동
+      window.location.href = "./login";
+    }
+  });
+      </script>
