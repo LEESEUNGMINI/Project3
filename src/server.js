@@ -2,7 +2,6 @@ import "dotenv/config.js";
 import express from 'express';
 import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage } from './controller/webContorller.js';
 import { joinUser, loginUser } from "./controller/authController.js";
-import { joinUser } from "./controller/authController.js";
 import { getCourseList } from "./controller/courseController.js";
 
 
