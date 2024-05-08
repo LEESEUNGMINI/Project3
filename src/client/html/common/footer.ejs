@@ -18,17 +18,15 @@
         </div>
       </footer>
       <script>
-      const loginA = document.getElementById("loginA");
-  loginA.addEventListener("click", () => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      alert("토큰이 있습니다");
-      // 토큰이 있으면 myPage로 이동
-      window.location.href = "./myPage";
-    } else {
-      alert("토큰이 없습니다");
-      // 토큰이 없으면 로그인 페이지로 이동
-      window.location.href = "./login";
-    }
-  });
+            const loginA = document.getElementById("loginA");
+        loginA.addEventListener("click", () => {
+          const accessToken = localStorage.getItem("accessToken");
+          if (accessToken) {
+            // 토큰이 있으면 myPage로 이동
+            window.location.href = "./myPage";
+          } else {
+            // 토큰이 없으면 로그인 페이지로 이동
+            window.location.href = "./login";
+          }
+        });
       </script>
