@@ -5,6 +5,7 @@ import express from 'express';
 import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage } from './controller/webContorller.js';
 import { joinUser, loginUser } from "./controller/authController.js";
 import { getCourseList } from "./controller/courseController.js";
+import { notNeededAuth } from "./middleware/auth.js";
 
 
 const app = express();
@@ -32,6 +33,7 @@ app.get('/login', login);
 app.get('/sign', sign);
 // api
 app.post("/api/join", joinUser);
+app.get("/api/course", notNeededAuth, getCourseList);
 app.post("/api/login", loginUser);
 app.get("/api/list", getCourseList) /* 이미지 경로 확인 테스트 */
 // 서버에서 해당 사용자 정보를 가져와 클라이언트로 전송하는 라우트 추가
@@ -57,6 +59,7 @@ app.get("/api/userinfo", async (req, res) => {
     res.status(500).json({ message: "Failed to fetch user information" });
   }
 });
+
 
 
 // 서버 시작
