@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import db from "../config/db.js";
 
 export const joinUser = async (req, res) => {
@@ -23,4 +24,46 @@ export const joinUser = async (req, res) => {
   await db.execute(QUERY2, [userId, encryptPassword, userName, userEmail, userPhone]);
 
   res.status(201).json({ status: "success", message: "회원가입 완료" });
+};
+
+// 로그인
+// 로그인
+// 로그인
+// 로그인
+// 로그인
+
+export const loginUser = async (req, res) => {
+
+  const {userId, userPassword } = req.body;
+  // 1. id 에맞는 사용자를 찾기 => 없으면 에러
+  const QUERY = `SELECT * FROM users WHERE user_id = ?`;
+  const user = await db.execute(QUERY, [userId !== undefined ? userId : null]).then((result) => result[0][0]);
+  if (!user) {
+    return res
+      .status(400)
+      .json({ status: "fail", message: "아이디와 비밀번호를 확인해주세요." });
+  }
+
+  // 2. 비밀번호 맞는지 찾기
+  const isPasswordCorret = await bcrypt.compare(
+    userPassword,
+    user.user_password
+  );
+
+  if (!isPasswordCorret) {
+    return res
+      .status(400)
+      .json({ status: "fail", message: "아이디와 비밀번호를 확인해주세요." });
+  }
+  // 3. 회원 인증키 발급키 - json web token
+  // user.user_no
+  const accessToken = jwt.sign(
+    { no: user.user_no }, //
+    process.env.JWT_SECRET_KEY,
+    { expiresIn: process.env.JWT_EXPIRE }
+  );
+  console.log(accessToken)
+  res
+    .status(200)
+    .json({ status: "success", message: "로그인 성공", data: { accessToken } });
 };

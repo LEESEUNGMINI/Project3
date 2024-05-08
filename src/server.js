@@ -1,12 +1,12 @@
 import "dotenv/config.js";
 import express from 'express';
 import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage } from './controller/webContorller.js';
-import { joinUser } from "./controller/authController.js";
+import { joinUser, loginUser } from "./controller/authController.js";
 
 
 const app = express();
 // JSON 형식 변환 미들웨어
-app.use(express.json());
+
 
 // EJS 템플릿 엔진 설정
 app.set("view engine", "ejs");
@@ -15,6 +15,8 @@ app.set("views", process.cwd() + "/src/client/html");
 app.use("/css", express.static("src/client/css"));
 app.use("/js", express.static("src/client/js"));
 app.use("/file", express.static("src/client/file"));
+
+app.use(express.json());
 
 // 라우트 설정
 app.get('/', mainPage);
@@ -27,6 +29,7 @@ app.get('/login', login);
 app.get('/sign', sign);
 // api
 app.post("/api/join", joinUser);
+app.post("/api/login", loginUser);
 // 서버 시작
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
