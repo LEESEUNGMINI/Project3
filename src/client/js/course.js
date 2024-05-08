@@ -135,7 +135,7 @@ const makeCourseNaviHTML = (data) => {
   for (let i = 0; i < uniqueData.length; i++) {
     html += `<li class="course" onclick="clickCourseList(event, ${uniqueData[i].course_no})">`;
     if(uniqueData[i].user_courses_no) {
-      html += `<div class="mark-wrap"><img src="/file/complete.png" /></div>`;
+      html += `<div class="mark-wrap"><img src="/file/complete.svg" /></div>`;
     }
     html += `<p>${uniqueData[i].course_name}</p>`;
     html += `</li>`

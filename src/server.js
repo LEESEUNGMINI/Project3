@@ -4,8 +4,8 @@ import db from "./config/db.js";
 import express from 'express';
 import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage } from './controller/webContorller.js';
 import { joinUser, loginUser } from "./controller/authController.js";
-import { getCourseList } from "./controller/courseController.js";
-import { notNeededAuth } from "./middleware/auth.js";
+import { getCourseList, qrCheck } from "./controller/courseController.js";
+import { neededAuth, notNeededAuth } from "./middleware/auth.js";
 
 
 const app = express();
@@ -33,6 +33,7 @@ app.get('/login', login);
 app.get('/sign', sign);
 // api
 app.post("/api/join", joinUser);
+app.post("/api/course", neededAuth, qrCheck);
 app.get("/api/course", notNeededAuth, getCourseList);
 app.post("/api/login", loginUser);
 app.get("/api/list", getCourseList) /* 이미지 경로 확인 테스트 */
