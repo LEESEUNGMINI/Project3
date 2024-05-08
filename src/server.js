@@ -33,7 +33,6 @@ app.post("/api/join", joinUser);
 app.post("/api/login", loginUser);
 app.get("/api/list", getCourseList) /* 이미지 경로 확인 테스트 */
 
-
 // 서버 시작
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
