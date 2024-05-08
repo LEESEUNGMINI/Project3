@@ -12,6 +12,14 @@ export const getCourseList = async (req, res) => {
   res.status(200).json({ status: "success", message: "성공", data: result });
 };
 
+export const getCourseDetails = async (req, res) => {
+  const courseNo = req.params.course_no;
+  const QUERY = "SELECT * FROM course WHERE course_no = ?";
+  const result = await db.execute(QUERY, [courseNo]).then(result => result[0]);
+  res.status(200).json({ status: "success", message: "성공", data: result });
+};
+
+
 export const qrCheck = async (req, res) => {
   const user = req.user;
   console.log(user);
