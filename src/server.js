@@ -2,6 +2,8 @@ import "dotenv/config.js";
 import express from 'express';
 import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage } from './controller/webContorller.js';
 import { joinUser, loginUser } from "./controller/authController.js";
+import { joinUser } from "./controller/authController.js";
+import { getCourseList } from "./controller/courseController.js";
 
 
 const app = express();
@@ -30,6 +32,8 @@ app.get('/sign', sign);
 // api
 app.post("/api/join", joinUser);
 app.post("/api/login", loginUser);
+app.get("/api/list", getCourseList) /* 이미지 경로 확인 테스트 */
+
 // 서버 시작
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
