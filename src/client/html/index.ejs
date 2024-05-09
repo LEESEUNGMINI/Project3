@@ -28,7 +28,14 @@
         <h2>원하는 지역을 선택해주세요</h2>
         <!-- 선택할수 있는 지도가 들어가는 공간 -->
         <div id="mapSection">
-          zz
+          <div id="north_div">
+           <img class="north" src="../file/KN.png" alt="">
+           <div id="north_before"></div>
+          </div>
+          <div id="south_div">
+            <img class="south" src="../file/KS.png" alt="">
+            <div id="south_before"></div>
+          </div>
         </div>
       </section>
 
@@ -55,6 +62,39 @@
     });
 
   </script>
+<script>
+let scaleValue = 1; // 초기 크기
+
+// north_before div 클릭 이벤트
+const north = document.getElementById("north_div")
+north.addEventListener("click", function() {
+    scaleValue += 0.2; // 0.1씩 증가
+    north.style.zIndex = "12"
+    console.log("경북")
+    // north_div 확대
+    document.getElementById("north_div").style.transform = `scale(${scaleValue})`;
+
+    // 0.5초 후에 다른 페이지로 이동
+    setTimeout(function() {
+        window.location.href = "./map"; // 다른 페이지로 이동
+    }, 500); // 0.5초 후에 이동하도록 설정 (500ms = 0.5초)
+});
+
+// south_before div 클릭 이벤트
+const south = document.getElementById("south_div")
+south.addEventListener("click", function() {
+    scaleValue += 0.2; // 0.1씩 증가
+    south.style.zIndex = "12"
+    console.log("경남")
+    // south_div 확대
+    document.getElementById("south_div").style.transform = `scale(${scaleValue})`;
+
+    // 0.5초 후에 다른 페이지로 이동
+    setTimeout(function() {
+        window.location.href = "./map"; // 다른 페이지로 이동
+    }, 500); // 0.5초 후에 이동하도록 설정 (500ms = 0.5초)
+});
+</script>
   <%- include('common/footer.ejs') %>
 </body>
 </html>
