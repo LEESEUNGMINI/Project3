@@ -28,8 +28,14 @@
         <h2>원하는 지역을 선택해주세요</h2>
         <!-- 선택할수 있는 지도가 들어가는 공간 -->
         <div id="mapSection">
-          <img class="north" src="../file/KN.png" alt="">
-          <img class="south" src="../file/KS.png" alt="">
+          <div id="north_div">
+           <img class="north" src="../file/KN.png" alt="">
+           <div id="north_before"></div>
+          </div>
+          <div id="south_div">
+            <img class="south" src="../file/KS.png" alt="">
+            <div id="south_before"></div>
+          </div>
         </div>
       </section>
 
@@ -56,6 +62,17 @@
     });
 
   </script>
+<script>
+  // north_div의 가상 요소 클릭 이벤트
+  document.getElementById("north_before").addEventListener("click", function() {
+      console.log("경상북도");
+  });
+
+  // south_div의 가상 요소 클릭 이벤트
+  document.getElementById("south_before").addEventListener("click", function() {
+      console.log("경상남도");
+  });
+</script>
   <%- include('common/footer.ejs') %>
 </body>
 </html>
