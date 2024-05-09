@@ -33,6 +33,9 @@ a{
   height: 500px;
   position: relative;
 }
+#north_div{
+  position: relative;
+}
 #north_before{
   display: block;
   width: 180px;
