@@ -2,7 +2,8 @@ footer{
   width: 100%;
   height: 80px;
   background: white;
-  border: 1px solid #900034;
+  /* border: 2px solid #E6E3B8; */
+  outline: 3px solid #E6E3B8;
   border-bottom: 0px;
   position: fixed;
   bottom: 0px;
@@ -27,13 +28,13 @@ footer{
   position: absolute;
   top: -50px;
   right: -43px;
-  background: #900034;
+  background: #fff;
   border-radius: 50%;
   padding: 16px;
+  outline: 3px solid #E6E3B8;
 }
 .mid_icon div img{
-  border: 50px;
-
+  padding: 10%;
 }
 .footer_icon{
   display: flex;
