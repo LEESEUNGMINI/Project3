@@ -12,6 +12,8 @@ a{
   display: flex;
   justify-content: center;
   overflow: hidden;
+  background-image: url(../file/background.png);
+  background-repeat: repeat;
 }
 #container{
   width: 100%;
@@ -22,4 +24,15 @@ a{
   font-weight: bold;
   font-size: 20px;
   color:black;
+}
+#mapSection {
+  margin-top: 30px;
+}
+.north {
+  margin-left: 30%;
+}
+.south {
+  position: absolute;
+  left: 19%;
+  bottom:14.5%
 }
