@@ -20,6 +20,7 @@ header img{
   object-fit: cover;
 }
 
+
 /* course */
 .course-nav-ul { display: flex; flex-wrap: wrap; padding: 20px 0; margin-bottom: 20px; }
 .course-nav-ul .course {font-size: 0.75rem; position: relative; width: 31%; text-align: center; border: 2px solid; border-radius: 30px; margin: 1%; padding: 1vh 0; font-weight: 500; border-color: rgb(221, 221, 221); background-color: rgb(238, 238, 238); font-family: "Pretendard-Medium"; }
