@@ -1,17 +1,39 @@
 
 #detailPage_img{
   width: 100%;
-  height: 200px;
+  height: 250px;
   margin-top: 10px;
   padding: 10px;
+  overflow: hidden;
+}
+#Yaungjojang_name{
+  display: flex;
+  align-items: center;
+}
+#detailPage_img img{
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
+#detail_span{
+  font-size: 30px;
+  color: #981A4A;
+  margin-left: 10px;
+}
+#Yaungjojang_joso{
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
 #yaungjojang_info_div{
   padding: 10px;
 }
 #yaungjojang_info_div_div{
   display: flex;
   justify-content: space-between;
+  height: 50px;
 }
 #detailPage_jjim{
   display: flex;
@@ -24,8 +46,11 @@
 .detailPage_info{
   display: flex;
   justify-content: space-between;
-  
-
+  margin-bottom: 50px;
+  margin-top: 10px;
+}
+.detail_soja{
+  color: #981A4A;
 }
 #detailPage_Cheheom{
   margin-top: 20px;
@@ -82,4 +107,27 @@
 }
 #sul{
   margin-top: 20px;
+}
+
+/* 캐러셀 */
+
+swiper-container {
+  width: 100%;
+  height: 300px;
+}
+
+swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

@@ -90,10 +90,24 @@ const clickCourseList = async (e, courseNo) => {
         courseDetailBtn.textContent = "자세히 보기";
         courseDetailBtn.classList.add("course-detail-btn");
         courseContentWrap.appendChild(courseDetailBtn);
+        courseDetailBtn.addEventListener("click", function() {
+          // 클릭한 코스의 세부 정보를 객체로 생성
+          const selectedCourse = {
+              courseName: item.course_name,
+              programName: item.course_program,
+              address: item.course_address,
+              // 필요한 다른 정보들도 추가할 수 있습니다.
+          };
+      
+          // URL에 코스 세부 정보를 전달하여 다른 페이지로 이동
+          window.location.href = `./detail?course=${JSON.stringify(selectedCourse.courseName)}`;
+      });
       })
     } else {
       courseProgramContainer.style.bottom = `-100%`;
     }
+    // '자세히보기 이동'
+
     // 코스프로그램 닫기 버튼
     const programCloseBtn = document.querySelector(".program-close-btn");
     programCloseBtn.addEventListener("click", () => {

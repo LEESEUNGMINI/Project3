@@ -13,48 +13,22 @@
         <!-- 양조장 이름 및 찜하기 -->
         <div id="yaungjojang_info_div_div">
           <!-- 왼쪽 양조장 이름 -->
-          <h2>양조장 이름</h2>
+          <h2 id="Yaungjojang_name"></h2>
           <!-- 오른쪽 찜하기 -->
           <div id="detailPage_jjim">
-            <!-- 하트 -->
-            <div>♥</div>
-            <!-- 찜하기 -->
-            <div>찜하기</div>
           </div>
         </div>
-        <div class="detailPage_info">
-          <!-- 왼쪽 -->
-          <div> 
-              <p>주소: <b>xx-xxxx-xxxx</b></p>
-              <p>주종: <b>증류주</b></p>
-              <p>예약 방문: <b>가능</b></p>
-          </div>
-          <!-- 오른쪽 -->
-          <div>
-            <p>전화번호: <b>xxx-xxxx-xxxx</b></p>
-            <p>상시 방문: <b>가능</b></p>
-            <p>홈페이지: <b>바로가기(Click)</b></p>
-          </div>
-       
-       
         <!--예약 방문 및 홈페이지 -->
-
+        <div class="detailPage_info">
        </div>
        <!-- 체험프로그램 정보 -->
        <div id="detailPage_Cheheom">
-        <!-- 타이틀 -->
-        <h2>체험프로그램</h2>
-        <div id="detailPage_Cheheom_div">
-          <!-- 왼쪽 이미지 -->
-          <div>이미지</div>
-          <!-- 오른쪽 텍스트 -->
-          <div>
-            <h3 class="detailPage_gap">프로그램명</h3>
-            <p class="detailPage_gap">소요시간: <b>2시간</b></p>
-            <p class="detailPage_gap">가격: <b>200,000원</b></p>
-            <div class="detailPage_gap" id="detailPage_button">체험 예약하기</div>
-          </div>
+        <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+        slides-per-view="1.3">
+        <div class="swiper-wrapper">
+          <!-- 슬라이드들이 여기에 추가됩니다 -->
         </div>
+      </swiper-container>
        </div>
        <!-- 파는 술 정보 -->
        <h2 id="sul">판매하는 술 </h2>
@@ -90,6 +64,8 @@
        <%- include('common/footer.ejs') %>
     </div>
     <!-- 이미지 경로 확인 테스트 -->
-    <script src="/js/detail.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <script src="../js/detail.js"></script>
+ 
 </body>
 </html>
