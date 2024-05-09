@@ -12,7 +12,7 @@ a{
 }
 #Main_div{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   background-image: url(../file/background.png);
@@ -21,6 +21,13 @@ a{
 #container{
   width: 100%;
   height: 100%;
+}
+.back {
+  visibility: hidden;
+  margin-top: 20px;
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
 }
 #main_contant{
   width: 100%;
