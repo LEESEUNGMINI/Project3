@@ -36,11 +36,12 @@ a{
 #north_before{
   display: block;
   width: 180px;
-  height: 200px;
+  height: 180px;
   position: absolute;
   top: 10px;
-  right: 70px;
-  z-index: 50;
+  right: 15%;
+  z-index: 10;
+  background: #000;
 
 
 }
