@@ -34,22 +34,74 @@
   </div>
   <!-- 3x3 그리드 -->
   <div class="grid-container">
-    <img src="../file/icon/stamp.png" class="grid-item " alt="">
-    <img src="../file/icon/stamp.png" class="grid-item " alt="">
-    <img src="../file/icon/stamp.png" class="grid-item " alt="">
-    <img src="../file/icon/stamp.png" class="grid-item " alt="">
-    <img src="../file/icon/stamp.png" class="grid-item " alt="">
-    <img src="../file/icon/stamp.png" class="grid-item " alt="">
-    <img src="../file/icon/stamp.png" class="grid-item " alt="">
-    <img src="../file/icon/stamp.png" class="grid-item " alt="">
+    <div>
+      <img src="../file/icon/stamp.png" class="grid-item " alt="고도리 와이너리">
+      <p>고도리 와이너리</p>
+    </div>
+    <div>
+      <img src="../file/icon/stamp.png" class="grid-item " alt="금정산성 토산주">
+      <p>금정산성 토산주</p>
+    </div>
+    <div>
+      <img src="../file/icon/stamp.png" class="grid-item " alt="명가원">
+      <p>명가원</p>
+    </div>
+    <div>
+      <img src="../file/icon/stamp.png" class="grid-item " alt="명인안동소주">
+      <p>명인안동소주</p>
+    </div>
+    <div>
+      <img src="../file/icon/stamp.png" class="grid-item " alt="문경주조">
+      <p>문경주조</p>
+    </div>
+    <div>
+      <img src="../file/icon/stamp.png" class="grid-item " alt="수도산와이너리">
+      <p>수도산와이너리</p>
+    </div>
+    <div>
+      <img src="../file/icon/stamp.png" class="grid-item " alt="오미나라">
+      <p>오미나라</p>
+    </div>
+    <div>
+      <img src="../file/icon/stamp.png" class="grid-item " alt="울진술도가">
+      <p>울진술도가</p>
+    </div>
   </div>
   <%- include('common/footer.ejs') %>
   </div>
   </div>
   <script>
-       const info = JSON.parse(localStorage.getItem("userData"));
-       const stam = document.getElementById("stamp_hun")
-       stam.innerHTML = `${info.user_name}님의` 
+        const info = JSON.parse(localStorage.getItem("userData"));
+        const stam = document.getElementById("stamp_hun")
+        stam.innerHTML = `${info.user_name}님의`
+        // 유저 코스 불러오기
+        async function fetchData() {
+        const accessToken = localStorage.getItem("accessToken");
+        const response = await fetch("/api/course", {
+          headers: { Authorization: `Bearer ${accessToken}`}
+        });
+        const result = await response.json();
+        const data = result.data;
+        
+        // 코스 넘버가 있는 데이터만 뽑기
+        const userCourses = data.filter((item) => {
+          return item.user_courses_no !== null;
+        });
+        // console.log(userCourses);
+
+        // 스탬프 바꾸기
+        const courseName = document.querySelectorAll(".grid-container > div");
+        userCourses.forEach((item) => {
+          courseName.forEach((image) => {
+            const stampImage = image.querySelector("img");
+            if(stampImage.alt === item.course_name) {
+              stampImage.src = "";
+              stampImage.src = "/file/icon/stampComplete.png";
+            };
+          });
+        });
+      }
+      fetchData();
   </script>
 </body>
 </html>
