@@ -29,6 +29,7 @@
           <!-- 슬라이드들이 여기에 추가됩니다 -->
         </div>
       </swiper-container>
+
        </div>
        <!-- 파는 술 정보 -->
        <h2 id="sul">판매하는 술 </h2>
@@ -65,7 +66,18 @@
     </div>
     <!-- 이미지 경로 확인 테스트 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-    <script src="../js/detail.js"></script>
- 
+<script src="../js/detail.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 1초 후에 swiper-container 요소를 표시하는 함수
+    function showSwiperContainer() {
+      const swiperContainer = document.querySelector('.mySwiper');
+      swiperContainer.style.display = 'block'; // 요소를 표시
+    }
+
+    // 1초 후에 showSwiperContainer 함수를 호출
+    setTimeout(showSwiperContainer, 250);
+  });
+</script>
 </body>
 </html>
