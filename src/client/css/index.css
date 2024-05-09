@@ -40,10 +40,19 @@ a{
   position: absolute;
   top: 10px;
   right: 15%;
-  z-index: 10;
+
 }
 
+/* 확대 효과를 위한 CSS */
+#north_div, #south_div {
+  transition: transform 0.5s ease;
+  transform-origin: center center; 
+}
 
+/* 클릭할 수 있는 div 스타일 */
+.clickable {
+  cursor: pointer;
+}
 .north {
   position: relative;
   margin-left: 30%;
@@ -56,14 +65,11 @@ a{
   position: absolute;
   bottom: 180px;
   left: 100px;
-  z-index: 50;
-
-
 }
 .south {
-  position: absolute;
+  position: relative;
   left: 18.2%;
-  bottom:23.5%
+  bottom:78.5px
 }
 @media screen and (min-width: 490px) {
   #north_before { right: 25%; }

@@ -63,15 +63,37 @@
 
   </script>
 <script>
-  // north_div의 가상 요소 클릭 이벤트
-  document.getElementById("north_before").addEventListener("click", function() {
-      console.log("경상북도");
-  });
+let scaleValue = 1; // 초기 크기
 
-  // south_div의 가상 요소 클릭 이벤트
-  document.getElementById("south_before").addEventListener("click", function() {
-      console.log("경상남도");
-  });
+// north_before div 클릭 이벤트
+const north = document.getElementById("north_div")
+north.addEventListener("click", function() {
+    scaleValue += 0.1; // 0.1씩 증가
+    north.style.zIndex = "12"
+    console.log("경북")
+    // north_div 확대
+    document.getElementById("north_div").style.transform = `scale(${scaleValue})`;
+
+    // 0.5초 후에 다른 페이지로 이동
+    setTimeout(function() {
+        window.location.href = "./map"; // 다른 페이지로 이동
+    }, 500); // 0.5초 후에 이동하도록 설정 (500ms = 0.5초)
+});
+
+// south_before div 클릭 이벤트
+const south = document.getElementById("south_div")
+south.addEventListener("click", function() {
+    scaleValue += 0.1; // 0.1씩 증가
+    south.style.zIndex = "12"
+    console.log("경남")
+    // south_div 확대
+    document.getElementById("south_div").style.transform = `scale(${scaleValue})`;
+
+    // 0.5초 후에 다른 페이지로 이동
+    setTimeout(function() {
+        window.location.href = "./map"; // 다른 페이지로 이동
+    }, 500); // 0.5초 후에 이동하도록 설정 (500ms = 0.5초)
+});
 </script>
   <%- include('common/footer.ejs') %>
 </body>
