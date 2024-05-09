@@ -6,7 +6,7 @@ const courseCheckFetch = async (qrCode) => {
   }
 
   if (!qrCode) {
-    msgAlert("bottom", "잘못된 qr코드입니다", "error");
+    msgAlert("center", "잘못된 qr코드입니다", "error");
     setTimeout(startScan, 3000);
     return;
   }
@@ -27,13 +27,13 @@ const courseCheckFetch = async (qrCode) => {
   const result = await response.json();
   console.log(result);
   if (result.status === "success") {
-    msgAlert("bottom", "방문 완료", "success");
+    msgAlert("center", "방문 완료", "success");
     setTimeout(() => {
-      window.location.href = "/course";
+      window.location.href = "/map";
     }, 2000);
     return;
   } else {
-    msgAlert("bottom", result.message, "error");
+    msgAlert("center", result.message, "error");
   }
   setTimeout(startScan, 3000);
 };
@@ -65,7 +65,7 @@ function startScan() {
     })
     .catch(function (err) {
       console.error("Error accessing the camera", err);
-      msgAlert("bottom", "카메라 접근에 실패했습니다.", "error");
+      msgAlert("center", "카메라 접근에 실패했습니다.", "error");
     });
 
   // 각 프레임에서 호출되어 QR 코드를 스캔하는 함수
