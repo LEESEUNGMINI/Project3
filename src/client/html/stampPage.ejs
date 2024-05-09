@@ -72,7 +72,10 @@
   </div>
   <script>
         const info = JSON.parse(localStorage.getItem("userData"));
-        const stam = document.getElementById("stamp_hun")
+        if(!info.user_name) {
+          window.location.href = "/login";
+        }
+        const stam = document.getElementById("stamp_hun");
         stam.innerHTML = `${info.user_name}님의`
         // 유저 코스 불러오기
         async function fetchData() {

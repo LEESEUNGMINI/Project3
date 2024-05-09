@@ -2,8 +2,8 @@ CREATE TABLE users (
 	user_no INT NOT NULL AUTO_INCREMENT,
 	user_id VARCHAR(500) NOT NULL UNIQUE,
 	user_password VARCHAR(500) NOT NULL,
-	user_email VARCHAR(200) NULL UNIQUE,
-  user_tel VARCHAR(200) NULL UNIQUE,
+	user_email VARCHAR(200) NULL,
+  user_tel VARCHAR(200) NULL,
 	user_image VARCHAR(500) NULL,
 	PRIMARY KEY (user_no)
 );
