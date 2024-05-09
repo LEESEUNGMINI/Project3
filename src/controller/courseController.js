@@ -16,9 +16,16 @@ export const getCourseDetails = async (req, res) => {
   const courseNo = req.params.course_no;
   const QUERY = "SELECT * FROM course WHERE course_no = ?";
   const result = await db.execute(QUERY, [courseNo]).then(result => result[0]);
-  res.status(200).json({ status: "success", message: "성공", data: result });
-};
+  const courseName = result[0]?.course_name;
 
+  if(courseName) {
+    const allDetailsQuery = "SELECT * FROM course WHERE course_name = ?";
+    const allDetailsResult = await db.execute(allDetailsQuery, [courseName]).then(result => result[0]);
+    res.status(200).json({ status: "success", message: "성공", data: allDetailsResult });
+  } else {
+    res.status(404).json({ status: "error", message: "해당하는 코스 이름이 없습니다." });
+  }
+};
 
 export const qrCheck = async (req, res) => {
   const user = req.user;

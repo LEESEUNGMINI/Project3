@@ -13,7 +13,7 @@ const panTo = (lat, lng) => {
   map.panTo(position);
 };
 
-const clickCourseList = (e, courseNo) => {
+const clickCourseList = async (e, courseNo) => {
   if(clickCourse !== courseNo) { // 같은 코스 메뉴를 클릭했을 때 동작하지 않게 하기위해
     const courseWrap = document.querySelectorAll(".course");
     for(let i = 0; i < courseWrap.length; i++) {
@@ -34,10 +34,74 @@ const clickCourseList = (e, courseNo) => {
       courseLongitude = matchCourse.course_longitude;
     }
     panTo(courseLatitude, courseLongitude);
+    // 클릭한 지역 코스 프로그램 확인
     clickCourse = courseNo;
+    // 디테일 컨테이너
+    const courseProgramContainer = document.querySelector(".course-program-container");
+    if(courseNo !== 0) {
+      const response = await fetch(`/api/course/${courseNo}`);
+      const result = await response.json();
+      const data = result.data;
+      console.log(data);
+      courseProgramContainer.style.bottom = "0";
+
+      // 클릭 시 내용 초기화 후 X버튼을 제외한 데이터 재랜더링을 위해 엘리먼트 삭제
+      const elementsRemove = courseProgramContainer.querySelectorAll(":not(.program-close-btn)");
+      elementsRemove.forEach(element => element.remove());
+
+      // 데이터 엘리먼트 추가
+      data?.map((item, index) => {
+        const courseWrap = document.createElement("div");
+        courseWrap.classList.add("course-wrap");
+        courseProgramContainer.appendChild(courseWrap);
+
+        const courseImageWrap = document.createElement("div");
+        courseImageWrap.classList.add("course-image-wrap");
+        courseWrap.appendChild(courseImageWrap);
+
+        const courseContentWrap = document.createElement("div");
+        courseContentWrap.classList.add("course-content-wrap");
+        courseWrap.appendChild(courseContentWrap);
+        
+        // 이미지
+        const images = data[0].course_img.split(", ").map(item => [item]);
+        const imageIndex = index < images.length ? index : 0;
+        const courseImage = document.createElement("img");
+        courseImage.src = `${images[imageIndex]}.jpg`;
+        courseImage.classList.add("course-image");
+        courseImageWrap.appendChild(courseImage);
+        // 코스명
+        const courseName = document.createElement("p");
+        courseName.textContent = `코스명 : ${item.course_name}`;
+        courseContentWrap.appendChild(courseName);
+        courseName.classList.add("course-name");
+        // 코스 프로그렘 이름
+        const courseProgramName = document.createElement("p");
+        courseProgramName.textContent = `프로그램명 : ${item.course_program}`;
+        courseContentWrap.appendChild(courseProgramName);
+        courseProgramName.classList.add("course-program-name");
+        // 코스 주소
+        const courseAddress = document.createElement("p");
+        courseAddress.textContent = `주소 : ${item.course_address}`;
+        courseContentWrap.appendChild(courseAddress);
+        courseAddress.classList.add("course-address")
+        // 자세히보기 버튼
+        const courseDetailBtn = document.createElement("button");
+        courseDetailBtn.textContent = "자세히 보기";
+        courseDetailBtn.classList.add("course-detail-btn");
+        courseContentWrap.appendChild(courseDetailBtn);
+      })
+    } else {
+      courseProgramContainer.style.bottom = `-100%`;
+    }
+    // 코스프로그램 닫기 버튼
+    const programCloseBtn = document.querySelector(".program-close-btn");
+    programCloseBtn.addEventListener("click", () => {
+      courseProgramContainer.style.bottom = `-100%`;
+    });
   }
-  console.log(courseNo);
 };
+
 
 // 마커를 그리는 함수
 const addMarker = (position) => {
