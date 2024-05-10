@@ -2,7 +2,7 @@
   max-width: 406px;
   height: 100vh;
   margin: 0 auto;
-  background-image: url(../file/background.png);
+  /* background-image: url(../file/background.png); */
   background-repeat: repeat;
 }
 #myPage_welcome {
