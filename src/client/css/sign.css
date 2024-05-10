@@ -42,7 +42,9 @@ body {
   border-radius: 5px;
   border: 1px solid #900034;
 }
-
+.input-group input[type="email"]{
+  width: 50px;
+}
 .input-group input[type="checkbox"] {
   margin-left: 10px;
 }
