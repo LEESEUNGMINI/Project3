@@ -18,21 +18,17 @@
           <!-- 왼쪽 양조장 이름 -->
           <h2 id="Yaungjojang_name"></h2>
           <!-- 오른쪽 찜하기 -->
-          <div id="detailPage_jjim">
-          </div>
+     
         </div>
         <!--예약 방문 및 홈페이지 -->
         <div class="detailPage_info">
        </div>
        <!-- 체험프로그램 정보 -->
        <div id="detailPage_Cheheom">
-        <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
-        slides-per-view="1.3">
-        <div class="swiper-wrapper">
-          <!-- 슬라이드들이 여기에 추가됩니다 -->
-        </div>
-      </swiper-container>
-
+        <h2>체험프로그램</h2>
+         <div class="mySwiperz">
+ 
+         </div>
        </div>
        <!-- 파는 술 정보 -->
        <h2 id="sul">판매하는 술 </h2>
@@ -70,17 +66,5 @@
     <!-- 이미지 경로 확인 테스트 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 <script src="../js/detail.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // 1초 후에 swiper-container 요소를 표시하는 함수
-    function showSwiperContainer() {
-      const swiperContainer = document.querySelector('.mySwiper');
-      swiperContainer.style.display = 'block'; // 요소를 표시
-    }
-
-    // 1초 후에 showSwiperContainer 함수를 호출
-    setTimeout(showSwiperContainer, 250);
-  });
-</script>
 </body>
 </html>

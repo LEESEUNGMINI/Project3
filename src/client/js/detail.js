@@ -36,28 +36,28 @@ const getCourseList = async () => {
     const detailInfoRight = `
       <div>
       <p><span class="detail_soja">주종:</span> <b id="Yaungjojang_jojong">${matchingData[0].course_alcohol}</b></p>
-        <p><span class="detail_soja">홈페이지:</span> <b id="Yaungjojang_home"><a href="${matchingData[0].course_homepage}" target="_blank">바로가기(Click)</a></b></p>
+        <p><span class="detail_soja">홈페이지:</span> <b id="Yaungjojang_home"><a href="${matchingData[0].course_homepage}" target="_blank">바로가기</a></b></p>
       </div>
     `;
 
     // 왼쪽 정보와 오른쪽 정보를 HTML에 삽입
     detailPageInfo.innerHTML = detailInfoLeft + detailInfoRight;
 // 캐러셀
-const swiperContainer = document.querySelector('.mySwiper');
+const swiperContainer = document.querySelector('.mySwiperz');
 for (let i = 0; i < matchingData.length; i++) {
   const course = matchingData[i];
   const imageUrl = course.course_img.split(',')[i]; // 첫 번째 이미지만 사용
 
   const swiperSlideHTML = `
-    <swiper-slide>
-      <img src="${imageUrl}.jpg" alt="course image" style="width: 50%;">
+    <div id="chehum_div">
+      <img src="${imageUrl}.jpg" alt="course image">
       <div class="program-info">
         <h3>${course.course_program}</h3>
         <p>소요시간: ${course.course_time}</p>
         <p>가격: ${course.course_cost ? course.course_cost + '원' : '정보 없음'}</p>
-        <p>${course.course_content}</p>
+        <p>내용: ${course.course_content}</p>
       </div>
-    </swiper-slide>
+    </div>
   `;
 
   swiperContainer.innerHTML += swiperSlideHTML;
