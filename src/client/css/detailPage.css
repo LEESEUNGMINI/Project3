@@ -12,8 +12,10 @@
 }
 #detailPage_img img{
   width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: 10px;
 }
 
 #detail_span{
@@ -27,13 +29,12 @@
   display: flex;
   align-items: center;
 }
-#yaungjojang_info_div{
-  padding: 10px;
-}
+
 #yaungjojang_info_div_div{
   display: flex;
   justify-content: space-between;
   height: 50px;
+  margin-left: 10px;
 }
 #detailPage_jjim{
   display: flex;
@@ -46,15 +47,22 @@
 .detailPage_info{
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
-  margin-top: 10px;
+  margin: 10px 40px 50px 10px;
 }
 .detail_soja{
   color: #981A4A;
 }
 #detailPage_Cheheom{
   margin-top: 20px;
+  overflow:scroll; 
+}
 
+#detailPage_Cheheom::-webkit-scrollbar {
+  width: 0; /* 가로 스크롤바 너비를 0으로 설정 */
+}
+
+#detailPage_Cheheom::-webkit-scrollbar-thumb {
+  background-color: transparent; /* 스크롤바 색상을 투명하게 설정 */
 }
 #detailPage_Cheheom_div{
   display: flex;
@@ -115,18 +123,41 @@ swiper-container {
   width: 100%;
   height: 300px;
 }
-
-swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#detailPage_Cheheom h2{
+  margin-bottom: 20px;
+  margin-left: 10px;
 }
-swiper-slide img {
-  display: block;
+.mySwiperz{
+  width: auto;
+  display: flex;
+  scroll-behavior: smooth;
+  overflow-y: hidden;
+  padding: 10px;
+}
+
+.mySwiperz #chehum_div{
+  width: 370px;
+  height: auto;
+  padding: 10px;
+  margin: 5px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 10px;
+}
+.mySwiperz .program-info{
+  width: 300px;
+  height: auto;
+  padding: 5px;
+  margin: 5px;
+  font-size: 14px;
+}
+.program-info h3{
+  font-size: 18px;
+}
+.mySwiperz img{
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 250px;
+  border-radius: 10px;
+}
+.mySwiperz::-webkit-scrollbar {
+  width: 0; /* 가로 스크롤바 너비를 0으로 설정 */
 }

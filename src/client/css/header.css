@@ -6,7 +6,8 @@ header{
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
-
+  border-bottom: 1.5px solid #FFFCE6;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
 }
 header img{
   width: 100px;
@@ -27,7 +28,7 @@ header img{
 .course-nav-ul .course.on { border-color: #900034; background-color: #900034; color: #fff; }
 .course-nav-ul .course .mark-wrap { position: absolute;  width: 50px; height: 50px; right: -8px; top: -20px; }
 .course-nav-ul .course .mark-wrap img { width: 100%; height: 100%; }
-#location-map { width: 90%; height: 400px; margin:0 auto; }
+#location-map { width: 90%; height: 400px; margin:0 auto; margin-bottom: 200px;}
 ol, ul { list-style: none; }
 /* 코스 클릭 시 코스 프로그램 css */
 .course-program-container { background-color: #fff; max-height: 320px; width: 100%; position: fixed; bottom: -50%; z-index: 20; transition: bottom 1s ease; overflow-y: scroll; padding: 1rem; padding-bottom: 120px; box-shadow: 0px -11px 4px 0px rgba(0, 0, 0, 0.25);}
