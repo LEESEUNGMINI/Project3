@@ -33,9 +33,10 @@
   grid-gap: 15px;
   margin-top: 0px;
   padding: 30px 10px;
-  padding-bottom: 160px;
   text-align: center;
   font-weight: bold;
+  background: rgba(255,255,255,0.7);
+  margin:3%;
 }
 .grid-container > div p { text-align: center; }
 .grid-item {
