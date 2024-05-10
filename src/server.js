@@ -2,7 +2,7 @@ import "dotenv/config.js";
 import jwt from "jsonwebtoken";
 import db from "./config/db.js";
 import express from 'express';
-import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage, socialLogin } from './controller/webContorller.js';
+import { detailPage, guide, login, mainPage, mapPage, myPage, qrPage, sign, stampPage, socialLogin } from './controller/webContorller.js';
 import { joinUser, loginUser } from "./controller/authController.js";
 import { getCourseDetails, getCourseList, qrCheck } from "./controller/courseController.js";
 import { neededAuth, notNeededAuth } from "./middleware/auth.js";
@@ -32,6 +32,7 @@ app.get('/stampPage', stampPage);
 app.get('/login', login);
 app.get('/sign', sign);
 
+app.get('/guide',guide)
 // 소셜로그인
 app.get("/socialLogin", socialLogin);
 // api

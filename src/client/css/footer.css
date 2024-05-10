@@ -20,6 +20,7 @@ footer{
 }
 .mid_icon{
   position: relative;
+  margin-left: 20px;
 }
 .mid_icon div{
   width: 100px;
