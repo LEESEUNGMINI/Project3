@@ -15,7 +15,6 @@
         <!-- 왼쪽 환영및 로그아웃 -->
         <div id="myPage_welcome_div_left">
           <div id="stamp_hun"></div>
-          <div >스탬프 현황</div>
       </div>
         <!-- 오른쪽 프로필 이미지 -->
         <div class="profile">
@@ -73,11 +72,12 @@
   </div>
   <script>
         const info = JSON.parse(localStorage.getItem("userData"));
-        if(!info.user_name) {
-          window.location.href = "/login";
-        }
         const stam = document.getElementById("stamp_hun");
-        stam.innerHTML = `${info.user_name}님의`
+        if(!info.user_name) {
+          stam.innerHTML = "로그인이<br /> 필요합니다."
+        } else {
+          stam.innerHTML = `${info.user_name}님의 <br /> 스탬프 현황`
+        }
         // 유저 코스 불러오기
         async function fetchData() {
         const accessToken = localStorage.getItem("accessToken");
