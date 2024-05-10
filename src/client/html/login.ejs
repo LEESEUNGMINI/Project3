@@ -38,7 +38,19 @@
       </div>
     </div>
   </div>
-  
-  <script src="../js/login.js"></script>
+  <script>
+    const kakaoBtn = document.querySelector("#kakao-login");
+    async function kakao() {
+      const response = await fetch(`/api/social/kakao`);
+      const result = await response.json();
+      const data = result.data;
+      return data;
+    }
+    const kakaoUrl = document.querySelector(".kakao-url");
+    kakaoBtn.addEventListener("click", async () => {
+      window.location.href = await kakao();
+    })
+  </script>
+  <script src="/js/login.js"></script>
 </body>
 </html>

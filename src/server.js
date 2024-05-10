@@ -2,7 +2,7 @@ import "dotenv/config.js";
 import jwt from "jsonwebtoken";
 import db from "./config/db.js";
 import express from 'express';
-import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage } from './controller/webContorller.js';
+import { detailPage, login, mainPage, mapPage, myPage, qrPage, sign, stampPage, socialLogin } from './controller/webContorller.js';
 import { joinUser, loginUser } from "./controller/authController.js";
 import { getCourseDetails, getCourseList, qrCheck } from "./controller/courseController.js";
 import { neededAuth, notNeededAuth } from "./middleware/auth.js";
@@ -31,6 +31,9 @@ app.get('/qrPage', qrPage);
 app.get('/stampPage', stampPage);
 app.get('/login', login);
 app.get('/sign', sign);
+
+// 소셜로그인
+app.get("/socialLogin", socialLogin);
 // api
 app.post("/api/join", joinUser);
 app.post("/api/course", neededAuth, qrCheck);
@@ -38,6 +41,23 @@ app.get("/api/course", notNeededAuth, getCourseList);
 app.get("/api/course/:course_no", getCourseDetails);
 app.post("/api/login", loginUser);
 app.get("/api/list", getCourseList) /* 이미지 경로 확인 테스트 */
+
+app.get("/api/social/:location", (req, res) => {
+  // console.log(req);
+  const location = req.params.location;
+  switch(location){
+    case "kakao":
+        res.send({ data: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_API}&redirect_uri=http://localhost:3000/socialLogin&response_type=code&state=kakao&prompt=login` });
+    default:
+        return "";
+  }
+});
+
+// app.get("/api/social/success", (req, res) => {
+//   const code = req.query.code;
+//   console.log(code);
+// })
+
 // 서버에서 해당 사용자 정보를 가져와 클라이언트로 전송하는 라우트 추가
 app.get("/api/userinfo", async (req, res) => {
   try {
