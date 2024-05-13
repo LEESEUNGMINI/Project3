@@ -53,7 +53,15 @@
               <div class="input-group">
                 <label for="userPassword">비밀번호</label>
                 <input type="password" id="userPassword" name="password" required>
-              </div>
+                <span class="error-message" id="passwordError"></span>
+                <span class="eyes1" id="eyes"><img src="../file/icon/eyes.png" alt=""></span>
+            </div>
+            <div class="input-group">
+              <label for="confirm-password">비밀번호 <br/>확인</label>
+              <input type="password" id="confirm-password" name="confirm-password" required>
+              <span class="error-message" id="confirmPasswordError"></span>
+              <span class="eyesd1" id="eyes"><img src="../file/icon/eyes.png" alt=""></span>
+          </div>
             <button id="info_change" class="info_change">내 정보 변경</button>
           </div>
         </form>
@@ -65,7 +73,6 @@
     document.getElementById('userId').textContent = info.user_id;
     document.getElementById('email').placeholder = info.user_email;
     document.getElementById('phone').placeholder = info.user_tel;
-    console.log(info)
   </script>
   <%- include('common/footer.ejs') %>
   </div>
