@@ -27,31 +27,21 @@
      
         <!-- 소셜 로그인 버튼 -->
         <div id="social-login">
-          <button class="social-button" id="naver-login">
-            <img src="../file/icon/btnG_아이콘사각.png" alt=""> 
-            <div>네이버 로그인</div>
-          </button>
-          <button class="social-button" id="kakao-login">
-            <img src="../file/icon/kakao.png" alt="">
-            <div>카카오 로그인</div>
-          </button>
+            <button class="social-button" id="naver-login">
+              <img src="../file/icon/btnG_아이콘사각.png" alt=""> 
+              <div>네이버 로그인</div>
+            </button>
+          <a href="/social/kakao">
+            <button class="social-button" id="kakao-login">
+              <img src="../file/icon/kakao.png" alt="">
+              <div>카카오 로그인</div>
+            </button>
+          </a>
         </div>
       </div>
     </div>
   </div>
-  <script>
-    const kakaoBtn = document.querySelector("#kakao-login");
-    async function kakao() {
-      const response = await fetch(`/api/social/kakao`);
-      const result = await response.json();
-      const data = result.data;
-      return data;
-    }
-    const kakaoUrl = document.querySelector(".kakao-url");
-    kakaoBtn.addEventListener("click", async () => {
-      window.location.href = await kakao();
-    })
-  </script>
+
   <script src="/js/login.js"></script>
 </body>
 </html>
