@@ -48,7 +48,7 @@ app.get("/api/social/:location", (req, res) => {
   const location = req.params.location;
   switch(location){
     case "kakao":
-        res.send({ data: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_API}&redirect_uri=http://localhost:3000/socialLogin&response_type=code&state=kakao&prompt=login` });
+        res.send({ data: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_API}&redirect_uri=${REDIRECT_URL}&response_type=code&state=kakao&prompt=login` });
     default:
         return "";
   }

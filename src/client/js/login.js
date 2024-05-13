@@ -49,7 +49,7 @@ const loginFetch = async () => {
       window.location.href = "/";
     }, 50);
   } else {
-    alert("로그인에 실패하셨습니다.", "error");
+    alert("아이디와 비밀번호를 확인해주세요", "error");
   }
 };
 
