@@ -24,9 +24,18 @@ body {
 .input-group label {
   display: block;
   margin-bottom: 5px;
-  color: #900034;
+  color: #981A4A;
 }
-
+.eyesa{
+  position: absolute;
+  right: 25px;
+  top: 24%;
+  cursor: pointer;
+}
+.eyesa img{
+  width: 29px;
+  height: 24px;
+}
 .input-group input[type="text"],
 .input-group input[type="password"] {
   width: 100%;

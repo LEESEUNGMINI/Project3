@@ -32,7 +32,7 @@
         <!-- 내 계정관리 및 정보 수정 -->
         <div id="myPage_info_info">
           <!-- 왼쪽 프로필 이미지 및 계정관리 -->
-          <div>
+          <form>
             <div class="info_section1">
               <img class="icon" src="../file/icon/profile2.png" alt="">
               <div class="myPage_info_info_user_profile">내 계정관리</div>
@@ -40,7 +40,7 @@
             <div id="myPage_info_info_user">
               <div class="input-group">
                 <label for="username">아이디</label>
-                <input type="text" id="userId" name="username" required>
+                <div id="userId"></div>
               </div>
               <div class="input-group">
                 <label for="email">이메일</label>
@@ -53,14 +53,119 @@
               <div class="input-group">
                 <label for="userPassword">비밀번호</label>
                 <input type="password" id="userPassword" name="password" required>
-              </div>
+                <span class="error-message" id="passwordError"></span>
+                <span class="eyes1" id="eyes"><img src="../file/icon/eyes.png" alt=""></span>
+            </div>
+            <div class="input-group">
+              <label for="confirm-password">비밀번호 <br/>확인</label>
+              <input type="password" id="confirm-password" name="confirm-password" required>
+              <span class="error-message" id="confirmPasswordError"></span>
+              <span class="eyesd1" id="eyes"><img src="../file/icon/eyes.png" alt=""></span>
+          </div>
             <button id="info_change" class="info_change">내 정보 변경</button>
           </div>
-        </div>
+        </form>
       </div>
     </section>
   </div>
-  <script src="../js/myPage.js"></script>
+  <script>
+    const info = JSON.parse(localStorage.getItem("userData"));
+    document.getElementById('userId').textContent = info.user_id;
+    document.getElementById('email').placeholder = info.user_email;
+    document.getElementById('phone').placeholder = info.user_tel;
+    const passowrd = document.getElementById("userPassword")
+    const passowrd1 = document.getElementById("confirm-password")
+
+    const eyes1 = document.querySelector(".eyes1");
+    const eyes1_img = document.querySelector(".eyes1 img")
+
+    let isPasswordVisible1 = false;
+
+      eyes1.addEventListener("click", () => {
+          if (isPasswordVisible1) {
+            passowrd.type = "password";
+              isPasswordVisible1 = false;
+              eyes1_img.src = "../file/icon/eyes.png"
+          } else {
+            passowrd.type = "text";
+              isPasswordVisible1 = true;
+              eyes1_img.src = "../file/icon/eyes2.png"
+          }
+      });
+      const eyesd1 = document.querySelector(".eyesd1");
+      const eyesd1_img = document.querySelector(".eyesd1 img")
+
+      let isPasswordVisibled1 = false;
+
+      eyesd1.addEventListener("click", () => {
+          if (isPasswordVisibled1) {
+            passowrd1.type = "password";
+            eyesd1_img.src = "../file/icon/eyes.png"
+            isPasswordVisibled1 = false;
+          } else {
+            passowrd1.type = "text";
+            isPasswordVisibled1 = true;
+            eyesd1_img.src = "../file/icon/eyes2.png"
+          }
+      });
+  </script>
+<script>
+const infoChangeButton = document.getElementById("info_change").addEventListener("click", () => {
+  // 새 비밀번호와 확인 비밀번호 가져오기
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const newPasswordInput = document.getElementById('userPassword'); 
+  const newPasswordValue = newPasswordInput.value.trim();
+
+  const confirmPasswordInput = document.getElementById('confirm-password')
+  const confirmPasswordValue = confirmPasswordInput.value.trim(); 
+
+  // 입력 값이 비어 있는지 확인
+  if (!newPasswordValue || !confirmPasswordValue || !email || !phone) {
+    console.log('입력 값을 모두 채워주세요.');
+    alert('빈칸없이 입력해주세요'); // 입력 값이 비어 있는 경우에도 경고창을 띄웁니다.
+    return;
+  }
+
+  // 새 비밀번호와 확인 비밀번호가 일치하지 않으면 에러 메시지를 표시하고 함수 종료
+  if (newPasswordValue !== confirmPasswordValue) {
+    console.log('비밀번호가 일치하지 않습니다.');
+    alert('비밀번호가 일치하지 않습니다.'); // 비밀번호가 일치하지 않는 경우에도 경고창을 띄웁니다.
+    return;
+  }else{
+    alert("정보수정 완료")
+  }
+
+  // 로그인된 사용자인지 확인
+  const accessToken = localStorage.getItem('accessToken');
+  if (!accessToken) {
+    alert('로그인이 필요합니다.');
+    return;
+  }
+
+  // 변경할 정보를 서버로 전송
+  fetch('/api/change-user-info', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    },
+    body: JSON.stringify({ email, phone, newPassword: newPasswordValue })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // 성공적으로 변경되면 메시지 표시
+      alert('정보가 성공적으로 변경되었습니다.');
+      location.reload();
+    } else {
+      // 변경 실패 시 에러 메시지 표시
+      alert('정보 변경에 실패했습니다. 다시 시도해주세요.');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+});
+</script>
   <%- include('common/footer.ejs') %>
   </div>
   </div>

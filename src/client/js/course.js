@@ -135,10 +135,10 @@ const delMarker = () => {
 
 const addCourseMarker = (course) => {
   // 방문했으면 A이미지, 안했으면 B이미지
-  let markerImageUrl = "/file/map_not_done.png";
+  let markerImageUrl = "/file/not_done.png";
   let markerImageSize = new kakao.maps.Size(25, 35);
   if(course.user_courses_no) {
-    markerImageUrl = "/file/map_complete.jpg";
+    markerImageUrl = "/file/done.png";
     markerImageSize = new kakao.maps.Size(25, 35);
   }
   const kakaoMarkerImage = new kakao.maps.MarkerImage(markerImageUrl, markerImageSize);

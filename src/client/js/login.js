@@ -5,6 +5,23 @@ const joinBtn = document.querySelector(".join");
 const loginBtn = document.getElementById("login")
 
 
+const eyesa = document.querySelector(".eyesa");
+const eyesa_img = document.querySelector(".eyesa img")
+
+let isPasswordVisiblea = false;
+
+eyesa.addEventListener("click", () => {
+    if (isPasswordVisiblea) {
+      userPasswordInput.type = "password";
+      eyesa_img.src = "../file/icon/eyes.png"
+      isPasswordVisiblea = false;
+    } else {
+      userPasswordInput.type = "text";
+      isPasswordVisiblea = true;
+        eyesa_img.src = "../file/icon/eyes2.png"
+    }
+});
+
 
 const getParameterByName = (name, url) => {
   if (!url) url = window.location.href;

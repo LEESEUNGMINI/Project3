@@ -84,6 +84,15 @@
   margin: 0 auto;
   padding-right: 30px;
 }
+#userId {
+  flex: 2;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0.5px solid #981A4A;
+  outline: none;
+  transition: border-color 1s ease;
+  font-size: 14px;
+}
 .icon{
   width: 40px;
   height: 40px;
@@ -193,4 +202,24 @@
 #img_cul {
   display: flex;
   justify-content: space-between;
+}
+.eyes1{
+  position: absolute;
+  right: 25px;
+  top: 24%;
+  cursor: pointer;
+}
+.eyes1 img{
+  width: 29px;
+  height: 24px;
+}
+.eyesd1 img{
+  width: 29px;
+  height: 24px;
+}
+.eyesd1{
+  position: absolute;
+  right: 25px;
+  top: 33%;
+  cursor: pointer;
 }

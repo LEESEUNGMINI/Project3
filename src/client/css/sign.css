@@ -9,7 +9,7 @@ body {
   margin-bottom: 86px;
   font-weight: bold;
   font-size: 40px;
-  color: #900034;
+  color: #981A4A;
 }
 #sign_label {
   font-size: 10px;
@@ -70,7 +70,7 @@ body {
   flex: 2;
   padding: 10px;
   border-radius: 5px;
-  border: 0.5px solid #900034;
+  border: 0.5px solid #981A4A;
   outline: none;
   transition: border-color 1s ease;
 }
@@ -99,7 +99,7 @@ button {
   margin: 37px 0;
   border: none;
   border-radius: 5px;
-  background-color: #900034;
+  background-color: #981A4A;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
