@@ -6,6 +6,8 @@ import { detailPage, guide, login, mainPage, mapPage, myPage, qrPage, sign, stam
 import { joinUser, loginUser } from "./controller/authController.js";
 import { getCourseDetails, getCourseList, qrCheck } from "./controller/courseController.js";
 import { neededAuth, notNeededAuth } from "./middleware/auth.js";
+import axios from "axios";
+import session from 'express-session';
 
 
 const app = express();
@@ -21,6 +23,10 @@ app.use("/js", express.static("src/client/js"));
 app.use("/file", express.static("src/client/file"));
 
 app.use(express.json());
+// 세션
+app.use(session({
+  secret:'secret',
+}))
 
 // 라우트 설정
 app.get('/', mainPage);
@@ -31,10 +37,11 @@ app.get('/qrPage', qrPage);
 app.get('/stampPage', stampPage);
 app.get('/login', login);
 app.get('/sign', sign);
-
 app.get('/guide',guide)
+
 // 소셜로그인
 app.get("/socialLogin", socialLogin);
+
 // api
 app.post("/api/join", joinUser);
 app.post("/api/course", neededAuth, qrCheck);
@@ -43,21 +50,60 @@ app.get("/api/course/:course_no", getCourseDetails);
 app.post("/api/login", loginUser);
 app.get("/api/list", getCourseList) /* 이미지 경로 확인 테스트 */
 
-app.get("/api/social/:location", (req, res) => {
+// 소셜로그인
+async function getProfile(accessToken){
+  const token = `Bearer ${accessToken}`;
+  const profileUrl = "https://kapi.kakao.com/v2/user/me";
+  const response = await axios.get(profileUrl,{
+      headers:{
+          Authorization: token
+      }
+  }) ;
+  const data = JSON.stringify(response.data);
+  const profile = JSON.parse(data);
+  return profile;
+}
+// 로그인 이동
+app.get("/social/:location", (req, res) => {
   // console.log(req);
   const location = req.params.location;
   switch(location){
     case "kakao":
-        res.send({ data: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_API}&redirect_uri=${REDIRECT_URL}&response_type=code&state=kakao&prompt=login` });
+        res.redirect(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_API}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&state=kakao&prompt=login`);
     default:
         return "";
   }
 });
+// 리다이렉트
+app.get("/api/social/kakao", async (req, res) => {
+  const {code} = req.query;
+  const url = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.KAKAO_API}&redirect_uri=${process.env.REDIRECT_URL}&code=${code}`;
+  const response = await axios.get(url);
+  const data = JSON.stringify(response.data);
+  const tokenData = JSON.parse(data);
+  // console.log(tokenData.access_token);
+  const profile = await getProfile(tokenData.access_token);
+  console.log(profile);
+  req.session.profile = profile;
+  const id = profile.id;
+  const nickname = profile.properties.nickname;
+  const email = profile.kakao_account.email;
+  console.log("Id:", id);
+  console.log("Nickname:", nickname);
+  console.log("Email:", email);
 
-// app.get("/api/social/success", (req, res) => {
-//   const code = req.query.code;
-//   console.log(code);
-// })
+  const QUERY = `SELECT user_no FROM users WHERE user_id = ?`;
+  const existUser = await db
+  .execute(QUERY, [id])
+  .then((result) => result[0][0]);
+  if(existUser) {
+    res.redirect("/");
+  } else {
+    const QUERY = `INSERT INTO users (user_id, user_password, user_name, user_email) VALUES (?, ?, ?, ?)`;
+    await db.execute(QUERY, [id, id, nickname, email]);
+    res.redirect("/");
+  }
+});
 
 // 서버에서 해당 사용자 정보를 가져와 클라이언트로 전송하는 라우트 추가
 app.get("/api/userinfo", async (req, res) => {
