@@ -110,20 +110,41 @@
       });
   </script>
 <script>
-const infoChangeButton = document.getElementById("info_change").addEventListener("click", () => {
+const infoChangeButton = document.getElementById("info_change").addEventListener("click", async () => {
   // 새 비밀번호와 확인 비밀번호 가져오기
-  const email = document.getElementById("email").value.trim();
-  const phone = document.getElementById("phone").value.trim();
   const newPasswordInput = document.getElementById('userPassword'); 
   const newPasswordValue = newPasswordInput.value.trim();
 
-  const confirmPasswordInput = document.getElementById('confirm-password')
+  const confirmPasswordInput = document.getElementById('confirm-password');
   const confirmPasswordValue = confirmPasswordInput.value.trim(); 
+
+  // 이메일과 전화번호 가져오기
+  const emailInput = document.getElementById('email');
+  const email = emailInput.value.trim();
+
+  const phoneInput = document.getElementById('phone');
+  let phone = phoneInput.value.trim();
+
+  // 이메일 형식 검사
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    console.log('올바른 이메일 주소를 입력해주세요.');
+    alert('올바른 이메일 주소를 입력해주세요.');
+    return;
+  }
+
+  // 전화번호 형식 검사
+  phone = phone.replace(/[^\d]/g, '');
+  if (!/^010\d{7,8}$/.test(phone)) {
+    console.log('올바른 전화번호를 입력해주세요.');
+    alert('올바른 전화번호를 입력해주세요.');
+    return;
+  }
 
   // 입력 값이 비어 있는지 확인
   if (!newPasswordValue || !confirmPasswordValue || !email || !phone) {
     console.log('입력 값을 모두 채워주세요.');
-    alert('빈칸없이 입력해주세요'); // 입력 값이 비어 있는 경우에도 경고창을 띄웁니다.
+    alert('빈칸없이 입력해주세요.'); // 입력 값이 비어 있는 경우에도 경고창을 띄웁니다.
     return;
   }
 
@@ -133,7 +154,7 @@ const infoChangeButton = document.getElementById("info_change").addEventListener
     alert('비밀번호가 일치하지 않습니다.'); // 비밀번호가 일치하지 않는 경우에도 경고창을 띄웁니다.
     return;
   }else{
-    alert("정보수정 완료")
+    alert("내 정보수정 완료")
   }
 
   // 로그인된 사용자인지 확인
@@ -144,16 +165,17 @@ const infoChangeButton = document.getElementById("info_change").addEventListener
   }
 
   // 변경할 정보를 서버로 전송
-  fetch('/api/change-user-info', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    },
-    body: JSON.stringify({ email, phone, newPassword: newPasswordValue })
-  })
-  .then(response => response.json())
-  .then(data => {
+  try {
+    const response = await fetch('/api/change-user-info', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({ email, phone, newPassword: newPasswordValue })
+    });
+
+    const data = await response.json();
     if (data.success) {
       // 성공적으로 변경되면 메시지 표시
       alert('정보가 성공적으로 변경되었습니다.');
@@ -162,8 +184,10 @@ const infoChangeButton = document.getElementById("info_change").addEventListener
       // 변경 실패 시 에러 메시지 표시
       alert('정보 변경에 실패했습니다. 다시 시도해주세요.');
     }
-  })
-  .catch(error => console.error('Error:', error));
+  } catch (error) {
+    console.error('Error:', error);
+    alert('정보 변경에 실패했습니다. 다시 시도해주세요.');
+  }
 });
 </script>
   <%- include('common/footer.ejs') %>
