@@ -61,7 +61,7 @@ function startScan() {
       video.srcObject = stream;
       video.setAttribute("playsinline", true);
       video.play();
-      requestAnimationFrame(tick);
+      requestAnimationFrame(tick); 
     })
     .catch(function (err) {
       console.error("Error accessing the camera", err);
@@ -92,10 +92,10 @@ function startScan() {
       // QR 코드를 찾은 경우
       if (code) {
         // QR 코드 주변에 테두리를 그립니다.
-        drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF0000");
-        drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF0000");
-        drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF0000");
-        drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF0000");
+        drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#981A4A");
+        drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#981A4A");
+        drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#981A4A");
+        drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#981A4A");
 
         // QR 코드에 저장된 데이터를 사용하여 어떤 작업을 수행합니다.
         return courseCheckFetch(code.data);
