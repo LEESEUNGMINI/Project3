@@ -11,11 +11,11 @@ let isPasswordVisible = false;
 
 eyes.addEventListener("click", () => {
     if (isPasswordVisible) {
-        userPasswordInput.type = "text";
+        userPasswordInput.type = "password";
         isPasswordVisible = false;
         eyes_img.src = "../file/icon/eyes.png"
     } else {
-        userPasswordInput.type = "password";
+        userPasswordInput.type = "text";
         isPasswordVisible = true;
         eyes_img.src = "../file/icon/eyes2.png"
     }
@@ -27,11 +27,11 @@ let isPasswordVisibled = false;
 
 eyesd.addEventListener("click", () => {
     if (isPasswordVisibled) {
-      userConfirmPasswordInput.type = "text";
+      userConfirmPasswordInput.type = "password";
       eyesd_img.src = "../file/icon/eyes.png"
         isPasswordVisibled = false;
     } else {
-      userConfirmPasswordInput.type = "password";
+      userConfirmPasswordInput.type = "text";
         isPasswordVisibled = true;
         eyesd_img.src = "../file/icon/eyes2.png"
     }
