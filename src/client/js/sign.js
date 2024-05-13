@@ -5,12 +5,11 @@ const userPhoneInput = document.getElementById('phone');
 const userPasswordInput = document.getElementById('userPassword');
 const userConfirmPasswordInput = document.getElementById('confirm-password');
 const userJoinBtn = document.getElementById("joinBtn");
-
 const joinFetch = async () => {
   const userId = userIdInput.value;
   const userName = userNameInput.value;
   const userEmail = userEmailInput.value;
-  const userPhone = userPhoneInput.value;
+  let userPhone = userPhoneInput.value;
   const userPassword = userPasswordInput.value;
   const userPassword2 = userConfirmPasswordInput.value;
 
@@ -23,6 +22,20 @@ const joinFetch = async () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(userEmail)) {
     alert("올바른 이메일 주소를 입력해주세요");
+    return;
+  }
+
+  if (userPassword !== userPassword2) {
+    alert("입력하신 비밀번호가 서로 일치하지 않습니다. 다시 확인해주세요.");
+    return;
+  }
+
+  // '+'와 '-' 제거하고 숫자만 남김
+  userPhone = userPhone.replace(/[^\d]/g, '');
+
+  // 전화번호가 12자리 이상이면 메시지 표시
+  if (userPhone.length > 11) {
+    alert("전화번호를 올바르게 입력해주세요.");
     return;
   }
 
@@ -40,7 +53,7 @@ const joinFetch = async () => {
       userEmail,
     }),
   });
- console.log(response,"zs")
+
   const data = await response.json();
   if (data.status === "success") {
     alert("회원가입 성공", "success");
@@ -48,9 +61,8 @@ const joinFetch = async () => {
       window.location.href = "/login";
     }, 1000);
   } else {
-    alert("회원가입에 실패하셨습니다.", "error");
+    alert("이미 존재하는 아이디입니다", "error");
   }
-  console.log(response,"z")
 };
 
 userJoinBtn.addEventListener("click", joinFetch);
