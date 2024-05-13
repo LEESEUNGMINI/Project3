@@ -84,6 +84,15 @@
   margin: 0 auto;
   padding-right: 30px;
 }
+#userId {
+  flex: 2;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0.5px solid #981A4A;
+  outline: none;
+  transition: border-color 1s ease;
+  font-size: 14px;
+}
 .icon{
   width: 40px;
   height: 40px;
