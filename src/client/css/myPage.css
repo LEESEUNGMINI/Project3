@@ -203,3 +203,23 @@
   display: flex;
   justify-content: space-between;
 }
+.eyes1{
+  position: absolute;
+  right: 25px;
+  top: 24%;
+  cursor: pointer;
+}
+.eyes1 img{
+  width: 29px;
+  height: 24px;
+}
+.eyesd1 img{
+  width: 29px;
+  height: 24px;
+}
+.eyesd1{
+  position: absolute;
+  right: 25px;
+  top: 33%;
+  cursor: pointer;
+}

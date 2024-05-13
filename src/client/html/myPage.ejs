@@ -73,6 +73,41 @@
     document.getElementById('userId').textContent = info.user_id;
     document.getElementById('email').placeholder = info.user_email;
     document.getElementById('phone').placeholder = info.user_tel;
+    const passowrd = document.getElementById("userPassword")
+    const passowrd1 = document.getElementById("confirm-password")
+
+    const eyes1 = document.querySelector(".eyes1");
+    const eyes1_img = document.querySelector(".eyes1 img")
+
+    let isPasswordVisible1 = false;
+
+      eyes1.addEventListener("click", () => {
+          if (isPasswordVisible1) {
+            passowrd.type = "password";
+              isPasswordVisible1 = false;
+              eyes1_img.src = "../file/icon/eyes.png"
+          } else {
+            passowrd.type = "text";
+              isPasswordVisible1 = true;
+              eyes1_img.src = "../file/icon/eyes2.png"
+          }
+      });
+      const eyesd1 = document.querySelector(".eyesd1");
+      const eyesd1_img = document.querySelector(".eyesd1 img")
+
+      let isPasswordVisibled1 = false;
+
+      eyesd1.addEventListener("click", () => {
+          if (isPasswordVisibled1) {
+            passowrd1.type = "password";
+            eyesd1_img.src = "../file/icon/eyes.png"
+            isPasswordVisibled1 = false;
+          } else {
+            passowrd1.type = "text";
+            isPasswordVisibled1 = true;
+            eyesd1_img.src = "../file/icon/eyes2.png"
+          }
+      });
   </script>
   <%- include('common/footer.ejs') %>
   </div>
