@@ -35,16 +35,16 @@ const joinFetch = async () => {
     }
 
     if (userPassword !== userPassword2) {
-        document.getElementById('confirmPasswordError').textContent = "입력하신 비밀번호가 서로 일치하지 않습니다. 다시 확인해주세요.";
+        document.getElementById('confirmPasswordError').textContent = "비밀번호가 서로 일치하지 않습니다..";
         return;
     }
 
     // '+'와 '-' 제거하고 숫자만 남김
     userPhone = userPhone.replace(/[^\d]/g, '');
 
-    // 전화번호가 12자리 이상이면 메시지 표시
-    if (userPhone.length > 11) {
-        document.getElementById('phoneError').textContent = "전화번호를 올바르게 입력해주세요.";
+    // 전화번호가 '010'으로 시작하고 10자리 이상 11자리 이하이면 정상적인 전화번호로 판단
+    if (!/^010\d{7,8}$/.test(userPhone)) {
+        document.getElementById('phoneError').textContent = "올바른 전화번호를 입력해주세요.";
         return;
     }
 
