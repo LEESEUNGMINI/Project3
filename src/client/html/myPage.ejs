@@ -32,7 +32,7 @@
         <!-- 내 계정관리 및 정보 수정 -->
         <div id="myPage_info_info">
           <!-- 왼쪽 프로필 이미지 및 계정관리 -->
-          <div>
+          <form>
             <div class="info_section1">
               <img class="icon" src="../file/icon/profile2.png" alt="">
               <div class="myPage_info_info_user_profile">내 계정관리</div>
@@ -40,7 +40,7 @@
             <div id="myPage_info_info_user">
               <div class="input-group">
                 <label for="username">아이디</label>
-                <input type="text" id="userId" name="username" required>
+                <div id="userId"></div>
               </div>
               <div class="input-group">
                 <label for="email">이메일</label>
@@ -56,11 +56,17 @@
               </div>
             <button id="info_change" class="info_change">내 정보 변경</button>
           </div>
-        </div>
+        </form>
       </div>
     </section>
   </div>
-  <script src="../js/myPage.js"></script>
+  <script>
+    const info = JSON.parse(localStorage.getItem("userData"));
+    document.getElementById('userId').textContent = info.user_id;
+    document.getElementById('email').placeholder = info.user_email;
+    document.getElementById('phone').placeholder = info.user_tel;
+    console.log(info)
+  </script>
   <%- include('common/footer.ejs') %>
   </div>
   </div>
