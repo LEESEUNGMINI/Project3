@@ -89,7 +89,6 @@ app.post("/api/change-password", async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to change password" });
   }
 });
-;
 
 
 // 서버에서 해당 사용자 정보를 가져와 클라이언트로 전송하는 라우트 추가

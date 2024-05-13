@@ -113,15 +113,23 @@
 const infoChangeButton = document.getElementById("info_change").addEventListener("click", () => {
   // 새 비밀번호와 확인 비밀번호 가져오기
   const newPasswordInput = document.getElementById('userPassword'); 
-  const newPasswordValue = newPasswordInput.value; 
+  const newPasswordValue = newPasswordInput.value.trim();
 
   const confirmPasswordInput = document.getElementById('confirm-password')
-  const confirmPasswordValue = confirmPasswordInput.value;
+  const confirmPasswordValue = confirmPasswordInput.value.trim(); 
+  if (!newPasswordValue || !confirmPasswordValue) {
+    console.log('비밀번호를 입력해주세요.');
+    alert('비밀번호를 입력해주세요.'); // 비밀번호가 비어 있는 경우에도 경고창을 띄웁니다.
+    return; // 여기서 함수를 종료하고 다음 코드를 실행하지 않도록 합니다.
+  }
 
   // 새 비밀번호와 확인 비밀번호가 일치하지 않으면 에러 메시지를 표시하고 함수 종료
   if (newPasswordValue !== confirmPasswordValue) {
     console.log('비밀번호가 일치하지 않습니다.');
-    return;
+    alert('비밀번호가 일치하지 않습니다.'); // 비밀번호가 일치하지 않는 경우에도 경고창을 띄웁니다.
+    return; // 여기서 함수를 종료하고 다음 코드를 실행하지 않도록 합니다.
+  }else{
+    alert('비밀번호가 성공적으로 변경되었습니다.')
   }
 
   // 로그인된 사용자인지 확인
@@ -142,6 +150,7 @@ const infoChangeButton = document.getElementById("info_change").addEventListener
   })
   .then(response => response.json())
   .then(data => {
+    console.log(data.success); // 데이터의 success 속성을 확인합니다.
     if (data.success) {
       // 성공적으로 변경되면 메시지 표시
       alert('비밀번호가 성공적으로 변경되었습니다.');
