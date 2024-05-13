@@ -109,6 +109,51 @@
           }
       });
   </script>
+<script>
+const infoChangeButton = document.getElementById("info_change").addEventListener("click", () => {
+  // 새 비밀번호와 확인 비밀번호 가져오기
+  const newPasswordInput = document.getElementById('userPassword'); 
+  const newPasswordValue = newPasswordInput.value; 
+
+  const confirmPasswordInput = document.getElementById('confirm-password')
+  const confirmPasswordValue = confirmPasswordInput.value;
+
+  // 새 비밀번호와 확인 비밀번호가 일치하지 않으면 에러 메시지를 표시하고 함수 종료
+  if (newPasswordValue !== confirmPasswordValue) {
+    console.log('비밀번호가 일치하지 않습니다.');
+    return;
+  }
+
+  // 로그인된 사용자인지 확인
+  const accessToken = localStorage.getItem('accessToken');
+  if (!accessToken) {
+    alert('로그인이 필요합니다.');
+    return;
+  }
+
+  // 비밀번호 변경 요청 보내기
+  fetch('/api/change-password', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    },
+    body: JSON.stringify({ newPassword: newPasswordValue })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // 성공적으로 변경되면 메시지 표시
+      alert('비밀번호가 성공적으로 변경되었습니다.');
+      location.reload();
+    } else {
+      // 변경 실패 시 에러 메시지 표시
+      alert('비밀번호 변경에 실패했습니다. 다시 시도해주세요.');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+});
+</script>
   <%- include('common/footer.ejs') %>
   </div>
   </div>

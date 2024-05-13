@@ -1,4 +1,5 @@
 import "dotenv/config.js";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import db from "./config/db.js";
 import express from 'express';
@@ -58,6 +59,38 @@ app.get("/api/social/:location", (req, res) => {
 //   const code = req.query.code;
 //   console.log(code);
 // })
+
+
+// 비밀번호 업데이트 엔드포인트
+app.post("/api/change-password", async (req, res) => {
+  try {
+    // 현재 사용자의 액세스 토큰 가져오기
+    const accessToken = req.headers.authorization.split(" ")[1];
+
+    // 액세스 토큰을 해독하여 사용자 식별자 가져오기
+    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
+    const userId = decoded.no;
+
+    // 새로운 비밀번호 받기
+    const { newPassword } = req.body;
+
+    // 새로운 비밀번호를 해싱
+    const encryptedPassword = await bcrypt.hash(newPassword, 8);
+
+    // 새로운 비밀번호를 DB에 업데이트
+    const QUERY = "UPDATE users SET user_password = ? WHERE user_no = ?";
+    await db.execute(QUERY, [encryptedPassword, userId]);
+
+    // 성공 응답 전송
+    res.status(200).json({ success: true, message: "비밀번호가 성공적으로 변경되었습니다." });
+  } catch (error) {
+    // 오류가 발생한 경우 클라이언트로 오류 응답 전송
+    console.error(error);
+    res.status(500).json({ success: false, message: "Failed to change password" });
+  }
+});
+;
+
 
 // 서버에서 해당 사용자 정보를 가져와 클라이언트로 전송하는 라우트 추가
 app.get("/api/userinfo", async (req, res) => {
