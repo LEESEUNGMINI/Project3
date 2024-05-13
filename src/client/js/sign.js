@@ -5,6 +5,37 @@ const userPhoneInput = document.getElementById('phone');
 const userPasswordInput = document.getElementById('userPassword');
 const userConfirmPasswordInput = document.getElementById('confirm-password');
 const userJoinBtn = document.getElementById("joinBtn");
+const eyes = document.querySelector(".eyes");
+const eyes_img = document.querySelector(".eyes img")
+let isPasswordVisible = false;
+
+eyes.addEventListener("click", () => {
+    if (isPasswordVisible) {
+        userPasswordInput.type = "text";
+        isPasswordVisible = false;
+        eyes_img.src = "../file/icon/eyes.png"
+    } else {
+        userPasswordInput.type = "password";
+        isPasswordVisible = true;
+        eyes_img.src = "../file/icon/eyes2.png"
+    }
+});
+const eyesd = document.querySelector(".eyesd");
+const eyesd_img = document.querySelector(".eyesd img")
+
+let isPasswordVisibled = false;
+
+eyesd.addEventListener("click", () => {
+    if (isPasswordVisibled) {
+      userConfirmPasswordInput.type = "text";
+      eyesd_img.src = "../file/icon/eyes.png"
+        isPasswordVisibled = false;
+    } else {
+      userConfirmPasswordInput.type = "password";
+        isPasswordVisibled = true;
+        eyesd_img.src = "../file/icon/eyes2.png"
+    }
+});
 
 const joinFetch = async () => {
     const userId = userIdInput.value;
