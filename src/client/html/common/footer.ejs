@@ -48,7 +48,7 @@
 
         const info = JSON.parse(localStorage.getItem("userData"));
         const u = document.getElementById("WelcomeUser");
-        u.innerHTML = `${info.user_name}님 하이`;
+        u.innerHTML = `${info.user_name}님`;
 
         const logOut = document.getElementById("logOut");
         logOut.addEventListener("click", () => {
