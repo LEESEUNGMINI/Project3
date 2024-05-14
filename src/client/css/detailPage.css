@@ -127,6 +127,11 @@ swiper-container {
   margin-bottom: 20px;
   margin-left: 10px;
 }
+/* .line {
+  border-bottom: 1px solid black;
+  width: 66%;
+  float: right;
+} */
 .mySwiperz{
   width: auto;
   display: flex;
