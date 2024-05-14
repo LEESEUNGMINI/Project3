@@ -15,6 +15,9 @@
   justify-content: space-around;
   align-items: center;
 }
+#WelcomeUser {
+  margin-top: 15px;
+}
 .logOut {
   width: 125px;
   height: 40px;
