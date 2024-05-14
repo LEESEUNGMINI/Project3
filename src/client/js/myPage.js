@@ -127,7 +127,7 @@
   }
 });
 
-// 프로필 이미지 미리보기,업로드
+// 프로필 이미지 
 document.getElementById("profile_img").addEventListener("click", function(){
   document.getElementById("image_upload").click();
 })
@@ -142,5 +142,5 @@ document.getElementById("image_upload").addEventListener("change",function(e) {
     };
     reader.readAsDataURL(file);
   }
-  console.log(selectImg.src)
+  console.log("선택 이미지",selectImg.src)
 });
