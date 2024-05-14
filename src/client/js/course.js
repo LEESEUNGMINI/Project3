@@ -24,7 +24,7 @@ const clickCourseList = async (e, courseNo) => {
   
     let courseLatitude; 
     let courseLongitude;
-
+    // 내 위치
     if(courseNo === 0) {
       courseLatitude = userLatitude;
       courseLongitude = userLongitude;
@@ -32,7 +32,7 @@ const clickCourseList = async (e, courseNo) => {
       const matchCourse = courseData.find(c => c.course_no === courseNo);
       courseLatitude = matchCourse.course_latitude;
       courseLongitude = matchCourse.course_longitude;
-    }
+    } zoomIn(2);
     panTo(courseLatitude, courseLongitude);
     // 클릭한 지역 코스 프로그램 확인
     clickCourse = courseNo;
@@ -119,7 +119,7 @@ const clickCourseList = async (e, courseNo) => {
 
 // 마커를 그리는 함수
 const addMarker = (position) => {
-  let markerImageUrl = "/file/not_done.png"; // 현재 위치 마커
+  let markerImageUrl = "/file/mylocation.png"; // 현재 위치 마커
   let markerImageSize = new kakao.maps.Size(25, 35);
   const kakaoMarkerImage = new kakao.maps.MarkerImage(markerImageUrl, markerImageSize);
   let marker = new kakao.maps.Marker({
@@ -173,6 +173,20 @@ const setCourseMarker = () => {
     addCourseMarker(uniqueData[i]);
   }
 };
+
+function zoomIn(number) {
+  // 현재 레벨의 지도
+  var level=map.getLevel();
+  // 지도 1레벨 내림(지도 확대)
+  map.setLevel(number); //3
+}
+
+function zoomOut(number){
+   // 현재 레벨의 지도
+  var level=map.getLevel();
+  // 지도 1레벨 올림(지도 축소)
+  map.setLevel(level+number);
+}
 
 // 지도 그리기
 const drawMap = (lat, lng) => {
@@ -229,9 +243,9 @@ const makeCourseNaviHTML = (data) => {
   let html = "";
   for (let i = 0; i < uniqueData.length; i++) {
     html += `<li class="course" onclick="clickCourseList(event, ${uniqueData[i].course_no})">`;
-    if(uniqueData[i].user_courses_no) {
-      html += `<div class="mark-wrap"><img src="/file/complete.svg" /></div>`;
-    }
+    // if(uniqueData[i].user_courses_no) {
+    //   html += `<div class="mark-wrap"><img src="/file/complete.svg" /></div>`;
+    // }
     html += `<p>${uniqueData[i].course_name}</p>`;
     html += `</li>`
   }
