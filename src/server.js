@@ -51,6 +51,7 @@ app.post("/api/course", neededAuth, qrCheck);
 app.get("/api/course/map/:point", notNeededAuth, getCourseList);
 app.get("/api/course/:course_no", getCourseDetails);
 app.post("/api/login", loginUser);
+app.get("/api/list", getCourseList);
 
 // 소셜로그인
 async function getProfile(accessToken){
@@ -122,6 +123,7 @@ const handleNaverLogin = async (naverAccessToken, naverRefreshToken, profile, do
   const id = profile.id;
   const nickname = profile.nickname;
   const email = profile.email;
+  const profileImage = profile.profileImage;
   // user_id 찾기 provider
   const QUERY = `SELECT user_no FROM users WHERE user_id = ?`;
   let existUser = await db
@@ -129,8 +131,8 @@ const handleNaverLogin = async (naverAccessToken, naverRefreshToken, profile, do
   .then((result) => result[0][0]);
 
   if(!existUser) {
-    const QUERY = `INSERT INTO users (user_id, user_password, user_name, user_email, social) VALUES (?, ?, ?, ?, ?)`;
-    await db.execute(QUERY, [id, id, nickname, email, "naver"]);
+    const QUERY = `INSERT INTO users (user_id, user_password, user_image, user_name, user_email, social) VALUES (?, ?, ?, ?, ?, ?)`;
+    await db.execute(QUERY, [id, id, profileImage, nickname, email, "naver"]);
 
     const QUERY2 = `SELECT user_no FROM users WHERE user_id = ?`;
     existUser = await db
