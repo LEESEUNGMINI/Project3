@@ -9,7 +9,6 @@
       myPage.appendChild(message);
     }
 
-
     document.getElementById('userId').textContent = info.user_id;
     document.getElementById('email').placeholder = info.user_email;
     document.getElementById('phone').placeholder = info.user_tel;
@@ -129,13 +128,19 @@
 });
 
 // 프로필 이미지 미리보기,업로드
+document.getElementById("profile_img").addEventListener("click", function(){
+  document.getElementById("image_upload").click();
+})
+
+const selectImg=document.getElementById("profile_img")
 document.getElementById("image_upload").addEventListener("change",function(e) {
-  const file=event.target.files[0];
+  const file=e.target.files[0];
   if(file) {
     const reader = new FileReader();
     reader.onload = function(e) {
-      document.getElementById("profile_img").src = e.target.result;
+      selectImg.src = e.target.result;
     };
     reader.readAsDataURL(file);
   }
+  console.log(selectImg.src)
 });

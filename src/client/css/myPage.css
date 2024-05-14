@@ -55,6 +55,10 @@
   border-radius: 50%; /* 이미지 자체도 원형으로 보이게 설정 */
 }
 
+#image_upload {
+  display: none;
+}
+
 .myPage {
   margin: 0 12px;
   background: rgba(255,255,255,0.4);
