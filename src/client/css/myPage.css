@@ -38,16 +38,23 @@
 }
 .profile {
   width: 128px;
-  height: 128px;
+  height: 128px; /* 이 값을 원형으로 유지 */
   background: white;
   outline: 5px solid #FFFCE6;
   border-radius: 50%;
+  overflow: hidden; /* 원 외부로 나가는 이미지를 숨깁니다 */
+  display: flex; /* 이미지를 가운데 정렬하기 위해 flex 사용 */
+  justify-content: center;
+  align-items: center;
 }
+
 .profile_img {
   object-fit: cover;
-  object-position: center;
-  margin: 23px 26px;
+  width: 100%; /* 부모의 너비에 맞게 조정 */
+  height: 100%; /* 부모의 높이에 맞게 조정 */
+  border-radius: 50%; /* 이미지 자체도 원형으로 보이게 설정 */
 }
+
 .myPage {
   margin: 0 12px;
   background: rgba(255,255,255,0.4);
