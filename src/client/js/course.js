@@ -119,8 +119,12 @@ const clickCourseList = async (e, courseNo) => {
 
 // 마커를 그리는 함수
 const addMarker = (position) => {
+  let markerImageUrl = "/file/not_done.png"; // 현재 위치 마커
+  let markerImageSize = new kakao.maps.Size(25, 35);
+  const kakaoMarkerImage = new kakao.maps.MarkerImage(markerImageUrl, markerImageSize);
   let marker = new kakao.maps.Marker({
     position: position,
+    image:kakaoMarkerImage
   });
   marker.setMap(map);
   markers.push(marker);
