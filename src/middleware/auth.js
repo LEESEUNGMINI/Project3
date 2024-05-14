@@ -4,6 +4,7 @@ import db from "../config/db.js";
 // 1. 토큰이 있으면 유저 정보 넣어줌, 없으면 안넣어줌
 export const notNeededAuth = async (req, res, next) => {
   const authHeader = req.get("Authorization");
+  // console.log(authHeader);
   const token = authHeader.split(" ")[1];
   if (token && token != "null") {
     // 첫번째 인자 토큰값, 시크릿값, 콜백함수

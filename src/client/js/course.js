@@ -253,11 +253,20 @@ const makeCourseNaviHTML = (data) => {
   courseWrap.innerHTML = html;
 }
 
+
 // 코스 데이터를 불러오는 fetch 함수
 const getCourseList = async () => {
+  let point = getParameterByName("point");
+  let url;
+  console.log(point);
+  if(point) {
+    url = "/api/course/map/" + point;
+  }else {
+    url = "/api/course/map/all";
+  }
   // accessToken 불러오기
   const accessToken = localStorage.getItem("accessToken");
-  const response = await fetch("/api/course", {
+  const response = await fetch(url, {
     headers: { Authorization: `Bearer ${accessToken}`}
   });
   const result = await response.json();

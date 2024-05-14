@@ -48,7 +48,7 @@ app.get("/social/callback", (req, res) => {
 // api
 app.post("/api/join", joinUser);
 app.post("/api/course", neededAuth, qrCheck);
-app.get("/api/course", notNeededAuth, getCourseList);
+app.get("/api/course/map/:point", notNeededAuth, getCourseList);
 app.get("/api/course/:course_no", getCourseDetails);
 app.post("/api/login", loginUser);
 
