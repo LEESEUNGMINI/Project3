@@ -72,7 +72,7 @@
   <script>
     const info = JSON.parse(localStorage.getItem("userData"));
     // 소셜로그인 시 정보수정 X
-    if(info.social === "kakao") {
+    if(info.social === "kakao" || info.social === "naver") {
       const myPage = document.querySelector("#myPage_info");
       const infoPage = document.querySelector("#myPage_info_info_user");
       infoPage.style.display = "none";

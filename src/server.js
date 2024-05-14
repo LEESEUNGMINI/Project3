@@ -7,6 +7,8 @@ import { joinUser, loginUser } from "./controller/authController.js";
 import { getCourseDetails, getCourseList, qrCheck } from "./controller/courseController.js";
 import { neededAuth, notNeededAuth } from "./middleware/auth.js";
 import axios from "axios";
+import passport from "passport";
+import { Strategy as NaverStrategy } from "passport-naver-v2";
 // import session from 'express-session';
 
 const app = express();
@@ -39,7 +41,7 @@ app.get('/login', login);
 app.get('/sign', sign);
 app.get('/guide',guide);
 
-app.get("/kakao/callback", (req, res) => {
+app.get("/social/callback", (req, res) => {
   res.render("accessToken");
 })
 
@@ -89,9 +91,9 @@ app.get("/api/social/kakao", async (req, res) => {
   const id = profile.id;
   const nickname = profile.properties.nickname;
   const email = profile.kakao_account.email;
-  console.log("Id:", id);
-  console.log("Nickname:", nickname);
-  console.log("Email:", email);
+  // console.log("Id:", id);
+  // console.log("Nickname:", nickname);
+  // console.log("Email:", email);
 
   const QUERY = `SELECT user_no FROM users WHERE user_id = ?`;
   let existUser = await db
@@ -112,10 +114,55 @@ app.get("/api/social/kakao", async (req, res) => {
     process.env.JWT_SECRET_KEY,
     { expiresIn: process.env.JWT_EXPIRE }
   );
-
-  res.redirect("/kakao/callback?accessToken=" + accessToken);
-
+  res.redirect("/social/callback?accessToken=" + accessToken);
 });
+
+// 네이버 로그인
+const handleNaverLogin = async (naverAccessToken, naverRefreshToken, profile, done) => {
+  console.log(profile);
+  const id = profile.id;
+  const nickname = profile.nickname;
+  const email = profile.email;
+  // user_id 찾기 provider
+  const QUERY = `SELECT user_no FROM users WHERE user_id = ?`;
+  let existUser = await db
+  .execute(QUERY, [id])
+  .then((result) => result[0][0]);
+
+  if(!existUser) {
+    const QUERY = `INSERT INTO users (user_id, user_password, user_name, user_email, social) VALUES (?, ?, ?, ?, ?)`;
+    await db.execute(QUERY, [id, id, nickname, email, "naver"]);
+
+    const QUERY2 = `SELECT user_no FROM users WHERE user_id = ?`;
+    existUser = await db
+    .execute(QUERY2, [id])
+    .then((result) => result[0][0]);
+  } 
+  // token  만들기
+  const accessToken = jwt.sign(
+    { no: existUser.user_no },
+    process.env.JWT_SECRET_KEY,
+    { expiresIn: process.env.JWT_EXPIRE }
+  );
+
+
+  done(null, accessToken); // (에러, 정보)
+};
+
+passport.use(
+  new NaverStrategy({
+    clientID: process.env.NAVER_ID,
+    clientSecret: process.env.NAVER_SECRET,
+    callbackURL: "/naver/callback"
+  }, handleNaverLogin)
+)
+app.get("/naver", passport.authenticate("naver", { authType: "reprompt" }));
+app.get("/naver/callback", (req, res) => {
+  passport.authenticate("naver", { session: false}, async (err, accessToken) => {
+    console.log(accessToken);
+    res.redirect("/social/callback?accessToken=" + accessToken);
+  })(req, res);
+})
 
 // 서버에서 해당 사용자 정보를 가져와 클라이언트로 전송하는 라우트 추가
 app.get("/api/userinfo", async (req, res) => {
