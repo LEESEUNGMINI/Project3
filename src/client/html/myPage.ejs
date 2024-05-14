@@ -71,14 +71,25 @@
   </div>
   <script>
     const info = JSON.parse(localStorage.getItem("userData"));
+    // 소셜로그인 시 정보수정 X
+    if(info.social === "kakao") {
+      const myPage = document.querySelector("#myPage_info");
+      const infoPage = document.querySelector("#myPage_info_info_user");
+      infoPage.style.display = "none";
+      const message = document.createElement("p");
+      message.innerHTML = "소셜 로그인을 통해 로그인 한 경우<br />정보를 수정할 수 없습니다.";
+      myPage.appendChild(message);
+    }
+
+
     document.getElementById('userId').textContent = info.user_id;
     document.getElementById('email').placeholder = info.user_email;
     document.getElementById('phone').placeholder = info.user_tel;
-    const passowrd = document.getElementById("userPassword")
-    const passowrd1 = document.getElementById("confirm-password")
+    const passowrd = document.getElementById("userPassword");
+    const passowrd1 = document.getElementById("confirm-password");
 
     const eyes1 = document.querySelector(".eyes1");
-    const eyes1_img = document.querySelector(".eyes1 img")
+    const eyes1_img = document.querySelector(".eyes1 img");
 
     let isPasswordVisible1 = false;
 
@@ -109,9 +120,7 @@
             eyesd1_img.src = "../file/icon/eyes2.png"
           }
       });
-  </script>
-<script>
-const infoChangeButton = document.getElementById("info_change").addEventListener("click", async () => {
+  const infoChangeButton = document.getElementById("info_change").addEventListener("click", async () => {
   // 새 비밀번호와 확인 비밀번호 가져오기
   const newPasswordInput = document.getElementById('userPassword'); 
   const newPasswordValue = newPasswordInput.value.trim();
