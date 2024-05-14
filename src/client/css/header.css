@@ -6,7 +6,6 @@ header{
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
-  border-bottom: 1.5px solid #FFFCE6;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
 }
 header img{
