@@ -91,6 +91,7 @@ app.get("/api/social/kakao", async (req, res) => {
   const id = profile.id;
   const nickname = profile.properties.nickname;
   const email = profile.kakao_account.email;
+  const profileImage = profile.properties.profile_image;
   // console.log("Id:", id);
   // console.log("Nickname:", nickname);
   // console.log("Email:", email);
@@ -100,8 +101,8 @@ app.get("/api/social/kakao", async (req, res) => {
   .execute(QUERY, [id])
   .then((result) => result[0][0]);
   if(!existUser) {
-    const QUERY = `INSERT INTO users (user_id, user_password, user_name, user_email, social) VALUES (?, ?, ?, ?, ?)`;
-    await db.execute(QUERY, [id, id, nickname, email, "kakao"]);
+    const QUERY = `INSERT INTO users (user_id, user_password, user_image, user_name, user_email, social) VALUES (?, ?, ?, ?, ?, ?)`;
+    await db.execute(QUERY, [id, id, profileImage, nickname, email, "kakao"]);
 
     const QUERY2 = `SELECT user_no FROM users WHERE user_id = ?`;
     existUser = await db
@@ -119,7 +120,7 @@ app.get("/api/social/kakao", async (req, res) => {
 
 // 네이버 로그인
 const handleNaverLogin = async (naverAccessToken, naverRefreshToken, profile, done) => {
-  console.log(profile);
+  // console.log(profile);
   const id = profile.id;
   const nickname = profile.nickname;
   const email = profile.email;
