@@ -73,33 +73,35 @@
 let scaleValue = 1; // 초기 크기
 
 // north_before div 클릭 이벤트
-const north = document.getElementById("north_div")
+// const north = document.getElementById("north_div");
+const north = document.querySelector("#north > img");
 north.addEventListener("click", function() {
-    scaleValue += 0.2; // 0.1씩 증가
-    north.style.zIndex = "12"
-    console.log("경북")
-    // north_div 확대
-    document.getElementById("north_div").style.transform = `scale(${scaleValue})`;
+    // scaleValue += 0.2; // 0.1씩 증가
+    // north.style.zIndex = "12"
+    // console.log("경북")
+    // // north_div 확대
+    // document.getElementById("north_div").style.transform = `scale(${scaleValue})`;
 
-    // 0.5초 후에 다른 페이지로 이동
-    setTimeout(function() {
-        window.location.href = "./map"; // 다른 페이지로 이동
-    }, 500); // 0.5초 후에 이동하도록 설정 (500ms = 0.5초)
+    // // 0.5초 후에 다른 페이지로 이동
+    // setTimeout(function() {
+        window.location.href = "./map?point=north" // 다른 페이지로 이동
+    // }, 500); // 0.5초 후에 이동하도록 설정 (500ms = 0.5초)
 });
 
 // south_before div 클릭 이벤트
-const south = document.getElementById("south_div")
+// const south = document.getElementById("south_div");
+const south = document.querySelector("#south > img");
 south.addEventListener("click", function() {
-    scaleValue += 0.2; // 0.1씩 증가
-    south.style.zIndex = "12"
-    console.log("경남")
-    // south_div 확대
-    document.getElementById("south_div").style.transform = `scale(${scaleValue})`;
+    // scaleValue += 0.2; // 0.1씩 증가
+    // south.style.zIndex = "12"
+    // console.log("경남")
+    // // south_div 확대
+    // document.getElementById("south_div").style.transform = `scale(${scaleValue})`;
 
-    // 0.5초 후에 다른 페이지로 이동
-    setTimeout(function() {
-        window.location.href = "./map"; // 다른 페이지로 이동
-    }, 500); // 0.5초 후에 이동하도록 설정 (500ms = 0.5초)
+    // // 0.5초 후에 다른 페이지로 이동
+    // setTimeout(function() {
+        window.location.href = "./map?point=south"; // 다른 페이지로 이동
+    // }, 500); // 0.5초 후에 이동하도록 설정 (500ms = 0.5초)
 });
 </script>
   <%- include('common/footer.ejs') %>

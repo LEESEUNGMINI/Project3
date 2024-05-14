@@ -51,7 +51,6 @@ app.post("/api/course", neededAuth, qrCheck);
 app.get("/api/course", notNeededAuth, getCourseList);
 app.get("/api/course/:course_no", getCourseDetails);
 app.post("/api/login", loginUser);
-app.get("/api/list", getCourseList) /* 이미지 경로 확인 테스트 */
 
 // 소셜로그인
 async function getProfile(accessToken){
