@@ -1,18 +1,21 @@
 import "dotenv/config.js";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import db from "./config/db.js";
 import express from 'express';
-import { detailPage, guide, login, mainPage, mapPage, myPage, qrPage, sign, stampPage, socialLogin } from './controller/webContorller.js';
+import { detailPage, guide, login, mainPage, mapPage, myPage, qrPage, sign, stampPage } from './controller/webContorller.js';
 import { joinUser, loginUser } from "./controller/authController.js";
 import { getCourseDetails, getCourseList, qrCheck } from "./controller/courseController.js";
 import { neededAuth, notNeededAuth } from "./middleware/auth.js";
 import axios from "axios";
-import session from 'express-session';
-
+// import session from 'express-session';
 
 const app = express();
 // JSON 형식 변환 미들웨어
+
+// 세션
+// app.use(session({
+//   secret:'secret',
+// }))
 
 
 // EJS 템플릿 엔진 설정
@@ -24,10 +27,6 @@ app.use("/js", express.static("src/client/js"));
 app.use("/file", express.static("src/client/file"));
 
 app.use(express.json());
-// 세션
-app.use(session({
-  secret:'secret',
-}))
 
 // 라우트 설정
 app.get('/', mainPage);
@@ -38,10 +37,11 @@ app.get('/qrPage', qrPage);
 app.get('/stampPage', stampPage);
 app.get('/login', login);
 app.get('/sign', sign);
-app.get('/guide',guide)
+app.get('/guide',guide);
 
-// 소셜로그인
-app.get("/socialLogin", socialLogin);
+app.get("/kakao/callback", (req, res) => {
+  res.render("accessToken");
+})
 
 // api
 app.post("/api/join", joinUser);
@@ -85,7 +85,7 @@ app.get("/api/social/kakao", async (req, res) => {
   // console.log(tokenData.access_token);
   const profile = await getProfile(tokenData.access_token);
   console.log(profile);
-  req.session.profile = profile;
+  // req.session.profile = profile;
   const id = profile.id;
   const nickname = profile.properties.nickname;
   const email = profile.kakao_account.email;
@@ -94,47 +94,28 @@ app.get("/api/social/kakao", async (req, res) => {
   console.log("Email:", email);
 
   const QUERY = `SELECT user_no FROM users WHERE user_id = ?`;
-  const existUser = await db
+  let existUser = await db
   .execute(QUERY, [id])
   .then((result) => result[0][0]);
-  if(existUser) {
-    res.redirect("/");
-  } else {
-    const QUERY = `INSERT INTO users (user_id, user_password, user_name, user_email) VALUES (?, ?, ?, ?)`;
-    await db.execute(QUERY, [id, id, nickname, email]);
-    res.redirect("/");
-  }
+  if(!existUser) {
+    const QUERY = `INSERT INTO users (user_id, user_password, user_name, user_email, social) VALUES (?, ?, ?, ?, ?)`;
+    await db.execute(QUERY, [id, id, nickname, email, "kakao"]);
+
+    const QUERY2 = `SELECT user_no FROM users WHERE user_id = ?`;
+    existUser = await db
+    .execute(QUERY2, [id])
+    .then((result) => result[0][0]);
+  } 
+  // token  만들기
+  const accessToken = jwt.sign(
+    { no: existUser.user_no },
+    process.env.JWT_SECRET_KEY,
+    { expiresIn: process.env.JWT_EXPIRE }
+  );
+
+  res.redirect("/kakao/callback?accessToken=" + accessToken);
+
 });
-
-// 비밀번호 및 사용자 정보 업데이트 엔드포인트
-app.post("/api/change-user-info", async (req, res) => {
-  try {
-    // 현재 사용자의 액세스 토큰 가져오기
-    const accessToken = req.headers.authorization.split(" ")[1];
-
-    // 액세스 토큰을 해독하여 사용자 식별자 가져오기
-    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
-    const userId = decoded.no;
-
-    // 새로운 비밀번호, 이메일, 전화번호 받기
-    const { newPassword, email, phone } = req.body;
-
-    // 새로운 비밀번호를 해싱
-    const encryptedPassword = await bcrypt.hash(newPassword, 8);
-
-    // 사용자 정보를 DB에 업데이트
-    const UPDATE_QUERY = "UPDATE users SET user_password = ?, user_email = ?, user_tel = ? WHERE user_no = ?";
-    await db.execute(UPDATE_QUERY, [encryptedPassword, email, phone, userId]);
-
-    // 성공 응답 전송
-    res.status(200).json({ success: true, message: "비밀번호 및 사용자 정보가 성공적으로 변경되었습니다." });
-  } catch (error) {
-    // 오류가 발생한 경우 클라이언트로 오류 응답 전송
-    console.error(error);
-    res.status(500).json({ success: false, message: "Failed to change password and user info" });
-  }
-});
-
 
 // 서버에서 해당 사용자 정보를 가져와 클라이언트로 전송하는 라우트 추가
 app.get("/api/userinfo", async (req, res) => {
@@ -158,8 +139,6 @@ app.get("/api/userinfo", async (req, res) => {
     res.status(500).json({ message: "Failed to fetch user information" });
   }
 });
-
-
 
 // 서버 시작
 const PORT = process.env.PORT || 3000;
