@@ -48,6 +48,9 @@ for (let i = 0; i < matchingData.length; i++) {
   const course = matchingData[i];
   const imageUrl = course.course_img.split(',')[i]; // 첫 번째 이미지만 사용
 
+
+  // 각 코스 술 이름에 대해 반복하면서 처리할 수 있습니다.
+
   const swiperSlideHTML = `
     <div id="chehum_div">
       <img src="${imageUrl}.jpg" alt="course image">
@@ -62,6 +65,44 @@ for (let i = 0; i < matchingData.length; i++) {
 
   swiperContainer.innerHTML += swiperSlideHTML;
  
+}
+
+const acDosu = `${matchingData[0].course_alcohol_dosu}`
+const acMl = `${matchingData[0].course_alcohol_ml}`
+const acName = `${matchingData[0].course_alcohol_name}`
+const imgLen = matchingData[0].course_img
+const acNames =acName.split(', ');
+const acMls =acMl.split(', ');
+const acDosus =acDosu.split(', ');
+const acimg =imgLen.split(', ');
+const detailPageSuljeongboMainDiv = document.getElementById("detailPage_suljeongbo_main_div");
+let num = 0
+console.log(acimg.length,matchingData.length)
+for (let i = matchingData.length; i <= acimg.length; i++) {
+  const alcoholDiv = document.createElement("div");
+  alcoholDiv.classList.add("detailPage_suljeongbo");
+num++
+  const imgDiv = document.createElement("div");
+  imgDiv.id = "detailPage_suljeongbo_img";
+  imgDiv.innerHTML = `<img src="${matchingData[0].course_img.split(',')[i]}.jpg" alt="image">`;
+
+
+  const h3 = document.createElement("h3");
+  h3.textContent = acNames[num].trim();
+
+  const dosuP = document.createElement("p");
+  dosuP.innerHTML = `도수: <b>${acDosus[num].trim()}%</b>`;
+
+  const mlP = document.createElement("p");
+  mlP.innerHTML = `용량: <b>${acMls[num].trim()}</b>`;
+
+  imgDiv.appendChild(h3);
+  imgDiv.appendChild(dosuP);
+  imgDiv.appendChild(mlP);
+
+  alcoholDiv.appendChild(imgDiv);
+
+  detailPageSuljeongboMainDiv.appendChild(alcoholDiv);
 }
   } else {
     console.error('Matching data not found.');
