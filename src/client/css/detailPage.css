@@ -98,6 +98,10 @@
   display: flex;
   overflow-x: scroll;
   margin-bottom: 200px;
+  overflow-y: hidden;
+}
+#detailPage_suljeongbo_main_div::-webkit-scrollbar {
+  display: none; /* 스크롤 바 숨김 */
 }
 .detailPage_gap{
   margin-top: 5px;
