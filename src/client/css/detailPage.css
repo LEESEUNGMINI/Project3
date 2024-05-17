@@ -70,6 +70,18 @@
   gap: 20px;
 
 }
+#detailPage_Cheheom h2{
+  display: flex;
+  align-items: center;
+}
+
+.title-line{
+  border-bottom: 2px solid black;
+  width: 64%;
+  margin-left: 5px;
+  padding-top: 10px;
+}
+
 #detailPage_Cheheom_div div:nth-child(1){
   width: 50%;
   height: 150px;
@@ -126,6 +138,8 @@
 #sul{
   margin-top: 60px;
   margin-left: 10px;
+  display: flex;
+  align-items: center;
 }
 
 /* 캐러셀 */
