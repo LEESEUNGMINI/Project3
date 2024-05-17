@@ -30,7 +30,7 @@ header img{
 #location-map { width: 90%; height: 400px; margin:0 auto; margin-bottom: 200px;}
 ol, ul { list-style: none; }
 /* 코스 클릭 시 코스 프로그램 css */
-.course-program-container { background-color: #fff; max-height: 320px; width: 100%; position: fixed; bottom: -50%; z-index: 20; transition: bottom 1s ease; overflow-y: scroll; padding: 1rem; padding-bottom: 120px; box-shadow: 0px -11px 4px 0px rgba(0, 0, 0, 0.25);}
+.course-program-container { background-color: #fff; max-height: 320px; width: 100%; position: fixed; bottom: -50%; z-index: 20; transition: bottom 1s ease; overflow-y: scroll; padding: 1rem; padding-bottom: 120px; box-shadow: 0px -5px 4px 0px rgba(0, 0, 0, 0.25);}
 .program-close-btn { width: 20px; height: 20px; float: right;}
 .course-image { width: 120px; height: 120px; }
 .course-wrap {display: flex; align-items: center;}
