@@ -107,16 +107,20 @@
           });
         });
         // 스탬프가 5개 이상일 때 상품 획득 알림
-        if (userCourses.length===5) {
+        if (userCourses.length === 5) {
+          const alertShown = localStorage.getItem('alertShown');
+          if (!alertShown) {
           Swal.fire({
           title: "상품 획득!",
-          imageUrl:"/file/cong.png",
+          imageUrl: "/file/cong.png",
           imageWidth: 100,
           imageHeight: 100,
           imageAlt: "Custom image"
         });
+        localStorage.setItem('alertShown', 'true'); // 알림이 표시되었음을 저장
       }
     }
+  }
       fetchData();
   </script>
 </body>
