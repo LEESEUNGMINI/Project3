@@ -106,7 +106,17 @@
             };
           });
         });
+        // 스탬프가 5개 이상일 때 상품 획득 알림
+        if (userCourses.length >= 5) {
+          Swal.fire({
+          title: "상품 획득!",
+          imageUrl: "https://png.pngtree.com/png-clipart/20211119/ourmid/pngtree-firecracker-illustration-png-image_4037093.png",
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: "Custom image"
+        });
       }
+    }
       fetchData();
   </script>
 </body>
