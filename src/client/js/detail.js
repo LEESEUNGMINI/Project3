@@ -47,13 +47,12 @@ const swiperContainer = document.querySelector('.mySwiperz');
 for (let i = 0; i < matchingData.length; i++) {
   const course = matchingData[i];
   const imageUrl = course.course_img.split(',')[i]; // 첫 번째 이미지만 사용
-
+  const chehum = data[17].course_img.split(',')
 
   // 각 코스 술 이름에 대해 반복하면서 처리할 수 있습니다.
-
   const swiperSlideHTML = `
     <div id="chehum_div">
-      <img src="${imageUrl}.jpg" alt="course image">
+      <img src="${chehum[i]}.jpg" alt="course image">
       <div class="program-info">
         <h3>${course.course_program}</h3>
         <p>소요시간: ${course.course_time}</p>
@@ -76,15 +75,20 @@ const acMls =acMl.split(', ');
 const acDosus =acDosu.split(', ');
 const acimg =imgLen.split(', ');
 const detailPageSuljeongboMainDiv = document.getElementById("detailPage_suljeongbo_main_div");
+const filterimg = matchingData[0].course_img.split(",")
+const filterOk = filterimg.filter(imgSrc => imgSrc.includes("product"));
 let num = 0
+
 console.log(acimg.length,matchingData.length)
 for (let i = matchingData.length; i <= acimg.length; i++) {
   const alcoholDiv = document.createElement("div");
   alcoholDiv.classList.add("detailPage_suljeongbo");
-num++
+
+  num++
+
   const imgDiv = document.createElement("div");
   imgDiv.id = "detailPage_suljeongbo_img";
-  imgDiv.innerHTML = `<img src="${matchingData[0].course_img.split(',')[i]}.jpg" alt="image">`;
+  imgDiv.innerHTML = `<img src="${filterOk[num]}.jpg" alt="image">`;
 
 
   const h3 = document.createElement("h3");
