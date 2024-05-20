@@ -128,19 +128,19 @@
 });
 
 // 프로필 이미지 
-document.getElementById("profile_img").addEventListener("click", function(){
+const selectImg=document.getElementById("profile_img");
+selectImg.addEventListener("click", function(){
   document.getElementById("image_upload").click();
-})
+});
 
-const selectImg=document.getElementById("profile_img")
 document.getElementById("image_upload").addEventListener("change",function(e) {
   const file=e.target.files[0];
   if(file) {
     const reader = new FileReader();
     reader.onload = function(e) {
       selectImg.src = e.target.result;
+      console.log("선택 이미지",selectImg.src)
     };
     reader.readAsDataURL(file);
-  }
-  console.log("선택 이미지",selectImg.src)
+  };
 });
