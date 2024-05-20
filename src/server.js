@@ -10,6 +10,7 @@ import axios from "axios";
 import passport from "passport";
 import { Strategy as NaverStrategy } from "passport-naver-v2";
 // import session from 'express-session';
+import  bcrypt  from 'bcrypt';
 
 const app = express();
 // JSON 형식 변환 미들웨어
@@ -189,6 +190,36 @@ app.get("/api/userinfo", async (req, res) => {
     res.status(500).json({ message: "Failed to fetch user information" });
   }
 });
+
+// 비밀번호 및 사용자 정보 업데이트 엔드포인트
+app.post("/api/change-user-info", async (req, res) => {
+  try {
+    // 현재 사용자의 액세스 토큰 가져오기
+    const accessToken = req.headers.authorization.split(" ")[1];
+
+    // 액세스 토큰을 해독하여 사용자 식별자 가져오기
+    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
+    const userId = decoded.no;
+
+    // 새로운 비밀번호, 이메일, 전화번호 받기
+    const { newPassword, email, phone } = req.body;
+
+    // 새로운 비밀번호를 해싱
+    const encryptedPassword = await bcrypt.hash(newPassword, 8);
+
+    // 사용자 정보를 DB에 업데이트
+    const UPDATE_QUERY = "UPDATE users SET user_password = ?, user_email = ?, user_tel = ? WHERE user_no = ?";
+    await db.execute(UPDATE_QUERY, [encryptedPassword, email, phone, userId]);
+
+    // 성공 응답 전송
+    res.status(200).json({ success: true, message: "비밀번호 및 사용자 정보가 성공적으로 변경되었습니다." });
+  } catch (error) {
+    // 오류가 발생한 경우 클라이언트로 오류 응답 전송
+    console.error(error);
+    res.status(500).json({ success: false, message: "Failed to change password and user info" });
+  }
+});
+
 
 // 서버 시작
 const PORT = process.env.PORT || 3000;
