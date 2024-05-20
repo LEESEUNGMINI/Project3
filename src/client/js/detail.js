@@ -45,14 +45,16 @@ const getCourseList = async () => {
 // 캐러셀
 const swiperContainer = document.querySelector('.mySwiperz');
 for (let i = 0; i < matchingData.length; i++) {
+  const cum = 0 + matchingData.length;
   const course = matchingData[i];
   const imageUrl = course.course_img.split(',')[i]; // 첫 번째 이미지만 사용
   const chehum = data[17].course_img.split(',')
 
+  const hoha = cum+i
   // 각 코스 술 이름에 대해 반복하면서 처리할 수 있습니다.
   const swiperSlideHTML = `
     <div id="chehum_div">
-      <img src="${chehum[i]}.jpg" alt="course image">
+      <img src="${chehum[hoha]}.jpg" alt="course image">
       <div class="program-info">
         <h3>${course.course_program}</h3>
         <p>소요시간: ${course.course_time}</p>
