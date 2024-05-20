@@ -43,6 +43,9 @@ body {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+#social-login a{
+  text-decoration: none;
+}
 
 button {
   padding: 10px 20px;
