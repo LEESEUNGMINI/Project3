@@ -11,6 +11,9 @@ import passport from "passport";
 import { Strategy as NaverStrategy } from "passport-naver-v2";
 // import session from 'express-session';
 import  bcrypt  from 'bcrypt';
+import fileUpload from "express-fileupload";
+import { ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
+import { firebaseConfig, storage } from "./client/js/firebase.js";
 
 const app = express();
 // JSON 형식 변환 미들웨어
@@ -55,6 +58,66 @@ app.get("/api/course/:course_no", getCourseDetails);
 app.post("/api/login", loginUser);
 app.get("/api/list", getCourseList);
 
+// 파일 업로드
+app.use(fileUpload());
+
+// 프로필 사진이 있으면
+app.get("/api/fileload", async (req, res) => {
+  // 현재 사용자의 액세스 토큰 가져오기
+  const accessToken = req.headers.authorization.split(" ")[1];
+  // 액세스 토큰을 해독하여 사용자 식별자 가져오기
+  const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
+  const userId = decoded.no;
+
+  const QUERY = "SELECT user_image FROM users WHERE user_no=?;"
+  const existProfile = await db
+    .execute(QUERY, [userId])
+    .then((result) => result[0][0]);
+  if (existProfile) {
+    return res
+      .status(200)
+      .json({ user_image: existProfile.user_image });
+  }
+}); 
+// 프로필 사진을 바꾸면
+app.post("/api/fileload", async (req, res) => {
+  // 현재 사용자의 액세스 토큰 가져오기
+  const accessToken = req.headers.authorization.split(" ")[1];
+  // 액세스 토큰을 해독하여 사용자 식별자 가져오기
+  const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
+  const userId = decoded.no;
+  
+  try {
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).send('파일 없음');
+    }
+    let file = req.files.file;
+    // console.log(file);
+
+    const fileName = `alcohol/${Date.now()}_${file.name}`;
+    const storageRef = ref(storage, fileName);
+
+    // 이미지업로드
+    const metadata = {
+      contentType: file.mimetype
+    };
+
+    await uploadBytes(storageRef, file.data, metadata);
+    const downloadURL = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${encodeURIComponent(fileName)}?alt=media`;
+    // console.log('파일 URL:', downloadURL);
+
+    // 파일 url이 있으면 데이터베이스 저장
+    if(downloadURL) {
+      const QUERY = `UPDATE users SET user_image=? WHERE user_no=?`;
+      await db.execute(QUERY, [downloadURL, userId]);
+      res.send({ status: "success", message: "파일 업로드 완료" });
+    }
+    
+  } catch (error) {
+    console.error('파일 업로드 에러:', error);
+  }
+});
+
 // 소셜로그인
 async function getProfile(accessToken){
   const token = `Bearer ${accessToken}`;
@@ -88,7 +151,7 @@ app.get("/api/social/kakao", async (req, res) => {
   const tokenData = JSON.parse(data);
   // console.log(tokenData.access_token);
   const profile = await getProfile(tokenData.access_token);
-  console.log(profile);
+  // console.log(profile);
   // req.session.profile = profile;
   const id = profile.id;
   const nickname = profile.properties.nickname;

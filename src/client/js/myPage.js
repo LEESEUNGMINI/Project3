@@ -127,20 +127,51 @@
   }
 });
 
-// 프로필 이미지 
+const accessToken = localStorage.getItem("accessToken");
+// 프로필이 있는 경우
+async function fetchProfileImage() {
+  const response = await fetch("/api/fileload", {
+      headers: {
+          Authorization: `Bearer ${accessToken}`
+      }
+  });
+  if (response.ok) {
+      const result = await response.json();
+      if (result.user_image) {
+          selectImg.src = result.user_image;
+      }
+  } else {
+      console.error("이미지 없음");
+  }
+};
+window.onload = fetchProfileImage;
+
+// 프로필 이미지 변경
 const selectImg=document.getElementById("profile_img");
 selectImg.addEventListener("click", function(){
   document.getElementById("image_upload").click();
 });
-
-document.getElementById("image_upload").addEventListener("change",function(e) {
+document.getElementById("image_upload").addEventListener("change", async function(e) {
   const file=e.target.files[0];
   if(file) {
     const reader = new FileReader();
     reader.onload = function(e) {
       selectImg.src = e.target.result;
-      console.log("선택 이미지",selectImg.src)
+      // console.log("선택 이미지",selectImg.src);
     };
     reader.readAsDataURL(file);
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    const response = await fetch("/api/fileload", {
+      headers: { Authorization: `Bearer ${accessToken}`},
+      method: "POST",
+      body: formData
+    });
+    
+    const result = await response.json();
+    // console.log(result.url);
   };
 });
