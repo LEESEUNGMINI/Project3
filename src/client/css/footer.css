@@ -14,16 +14,15 @@ footer{
   justify-content: center;
 }
 #footer_div{
-  width: 90%;
+  width: 93%;
   height: 100%;
   display: flex;
   justify-content: space-between;
   position: relative;
-  margin-right: 4px;
 }
 .mid_icon{
   position: relative;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 .mid_icon div{
   width: 100px;
@@ -47,4 +46,8 @@ footer{
   align-items: center;
   height: 100%;
   font-size: 37px;
+}
+
+.footer_icon:nth-child(2){
+  padding-right: 10px;
 }
