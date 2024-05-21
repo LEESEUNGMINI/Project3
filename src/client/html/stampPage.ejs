@@ -17,12 +17,14 @@
         <!-- 왼쪽 환영및 로그아웃 -->
         <div id="myPage_welcome_div_left">
           <div id="stamp_hun"></div>
-      </div>
+          <div class="mission">🎁상품 획득 완료!</div>
+        </div>
         <!-- 오른쪽 프로필 이미지 -->
         <div class="profile">
           <img class="profile_img" src="../file/icon/profile.png">
         </div>
       </div>
+      
     </div>
     <!-- 지역선택 -->
      <!-- <div id="stampPage_region">
@@ -120,7 +122,12 @@
         localStorage.setItem('alertShown', 'true'); // 알림이 표시되었음을 저장
       }
     }
+      if (userCourses.length >= 5) {
+        const mission=document.querySelector(".mission")
+        mission.style.display="block";
+      }
   }
+      
       fetchData();
   </script>
 </body>

@@ -2,6 +2,10 @@
   width: 100%;
   padding: 3%
 }
+.mission {
+  font-size: 15px;
+  display: none;
+}
 .profile {
   width: 128px;
   height: 128px;
