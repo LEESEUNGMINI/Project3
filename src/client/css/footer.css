@@ -49,5 +49,10 @@ footer{
 }
 
 .footer_icon:nth-child(2){
-  padding-right: 7px;
+  margin-right: 10px;
+}
+
+.footer_icon:nth-child(4){
+  font-size: 40px;
+  padding-right: 8px;
 }
