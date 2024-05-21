@@ -75,6 +75,7 @@
   </div>
   </div>
   <script>
+        const accessToken = localStorage.getItem("accessToken");
         const info = JSON.parse(localStorage.getItem("userData"));
         const stam = document.getElementById("stamp_hun");
         if(!info.user_name) {
@@ -84,7 +85,6 @@
         }
         // 유저 코스 불러오기
         async function fetchData() {
-        const accessToken = localStorage.getItem("accessToken");
         const response = await fetch("/api/course", {
           headers: { Authorization: `Bearer ${accessToken}`}
         });
@@ -129,6 +129,24 @@
   }
       
       fetchData();
+    // 프로필이 있는 경우
+    const selectImg=document.querySelector(".profile_img");
+    async function fetchProfileImage() {
+      const response = await fetch("/api/fileload", {
+          headers: {
+              Authorization: `Bearer ${accessToken}`
+          }
+      });
+      if (response.ok) {
+          const result = await response.json();
+          if (result.user_image) {
+              selectImg.src = result.user_image;
+          }
+      } else {
+          console.error("이미지 없음");
+      }
+    };
+    window.onload = fetchProfileImage;
   </script>
 </body>
 </html>

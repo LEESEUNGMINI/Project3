@@ -128,6 +128,7 @@
 });
 
 const accessToken = localStorage.getItem("accessToken");
+const selectImg=document.getElementById("profile_img");
 // 프로필이 있는 경우
 async function fetchProfileImage() {
   const response = await fetch("/api/fileload", {
@@ -147,7 +148,6 @@ async function fetchProfileImage() {
 window.onload = fetchProfileImage;
 
 // 프로필 이미지 변경
-const selectImg=document.getElementById("profile_img");
 selectImg.addEventListener("click", function(){
   document.getElementById("image_upload").click();
 });
