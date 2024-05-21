@@ -1,4 +1,5 @@
     const info = JSON.parse(localStorage.getItem("userData"));
+ 
     // 소셜로그인 시 정보수정 X
     if(info.social === "kakao" || info.social === "naver") {
       const myPage = document.querySelector("#myPage_info");
@@ -49,15 +50,34 @@
       });
   
   // 이메일과 전화번호 수정하지 않으면 기존 정보로 설정
-  const emailInput = document.getElementById('email');
-  if (emailInput.value == '') {
-    emailInput.value = info.user_email;
-  }
+  window.addEventListener("load", async () => {
+    try {
+      // 서버에서 사용자 정보를 요청
+      const response = await fetch("/api/userinfo", {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
+        }
+      });
+      
+      // 응답 데이터를 JSON으로 파싱
+      const userData = await response.json();
+    localStorage.setItem("userData", JSON.stringify(userData));
+    const emailInput = document.getElementById('email');
+      if (emailInput.value == '') {
+        emailInput.value = userData.user_email;
+      }
 
-  const phoneInput = document.getElementById('phone');
-  if (phoneInput.value === '') {
-    phoneInput.value = info.user_tel;
-  } 
+      const phoneInput = document.getElementById('phone');
+      if (phoneInput.value === '') {
+        phoneInput.value = userData.user_tel;
+      } 
+    console.log(userData,"유저")
+    // 콘솔에 사용자 정보 출력
+    } catch (error) {
+      
+    }
+  });
+  
   const infoChangeButton = document.getElementById("info_change").addEventListener("click", async () => {
   // 새 비밀번호와 확인 비밀번호 가져오기
   const newPasswordInput = document.getElementById('userPassword'); 
