@@ -10,7 +10,7 @@ import axios from "axios";
 import passport from "passport";
 import { Strategy as NaverStrategy } from "passport-naver-v2";
 // import session from 'express-session';
-import  bcrypt  from 'bcrypt';
+import  bcrypt  from 'bcryptjs';
 import fileUpload from "express-fileupload";
 import { ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { firebaseConfig, storage } from "./client/js/firebase.js";
