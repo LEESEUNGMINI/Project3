@@ -44,6 +44,7 @@
           // 응답 데이터를 JSON으로 파싱
           const userData = await response.json();
         localStorage.setItem("userData", JSON.stringify(userData));
+        console.log(userData,"유저")
         // 콘솔에 사용자 정보 출력
 
         const info = JSON.parse(localStorage.getItem("userData"));
