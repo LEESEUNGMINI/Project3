@@ -178,22 +178,11 @@ async function fetchProfileImage() {
   }
 };
 window.onload = function() {
-  fetchProfileImage();
+    fetchProfileImage();
 };
 
-async function requestStoragePermission() {
-  if (navigator.permissions) {
-      const result = await navigator.permissions.query({ name: 'camera' });
-      if (result.state === 'denied') {
-          console.log('카메라 권한을 요청해야 합니다.');
-          // 권한 요청
-          await navigator.mediaDevices.getUserMedia({ video: true });
-      }
-  }
-}
 // 프로필 이미지 변경
-selectImg.addEventListener("click", async function(){
-  await requestStoragePermission();
+selectImg.addEventListener("click", function(){
   document.getElementById("image_upload").click();
 });
 document.getElementById("image_upload").addEventListener("change", async function(e) {
