@@ -10,8 +10,8 @@
     }
 
     document.getElementById('userId').textContent = info.user_id;
-    document.getElementById('email').placeholder = info.user_email;
-    document.getElementById('phone').placeholder = info.user_tel;
+    // document.getElementById('email').placeholder = info.user_email;
+    // document.getElementById('phone').placeholder = info.user_tel;
     const passowrd = document.getElementById("userPassword");
     const passowrd1 = document.getElementById("confirm-password");
 
@@ -47,6 +47,17 @@
             eyesd1_img.src = "../file/icon/eyes2.png"
           }
       });
+  
+  // 이메일과 전화번호 수정하지 않으면 기존 정보로 설정
+  const emailInput = document.getElementById('email');
+  if (emailInput.value == '') {
+    emailInput.value = info.user_email;
+  }
+
+  const phoneInput = document.getElementById('phone');
+  if (phoneInput.value === '') {
+    phoneInput.value = info.user_tel;
+  } 
   const infoChangeButton = document.getElementById("info_change").addEventListener("click", async () => {
   // 새 비밀번호와 확인 비밀번호 가져오기
   const newPasswordInput = document.getElementById('userPassword'); 
@@ -121,9 +132,10 @@
       // 변경 실패 시 에러 메시지 표시
       alert('정보 변경에 실패했습니다. 다시 시도해주세요.');
     }
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error:', error);
-    alert('정보 변경에 실패했습니다. 다시 시도해주세요.');
+    // alert('정보 변경에 실패했습니다. 다시 시도해주세요.');
   }
 });
 
