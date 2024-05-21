@@ -17,7 +17,7 @@
         <!-- 왼쪽 환영및 로그아웃 -->
         <div id="myPage_welcome_div_left">
           <div id="stamp_hun"></div>
-          <div class="mission">🎁상품 획득 완료!</div>
+          <div id="stapm_count"></div>
         </div>
         <!-- 오른쪽 프로필 이미지 -->
         <div class="profile">
@@ -90,12 +90,18 @@
         });
         const result = await response.json();
         const data = result.data;
+
+      
         
         // 코스 넘버가 있는 데이터만 뽑기
         const userCourses = data.filter((item) => {
           return item.user_courses_no !== null;
         });
         // console.log(userCourses);
+
+        // 상품 획득 카운트
+        const count = document.querySelector("#stapm_count");
+        count.textContent = `상품 획득까지 ${userCourses.length}/5`;
 
         // 스탬프 바꾸기
         const courseName = document.querySelectorAll(".grid-container > div");
@@ -110,6 +116,8 @@
         });
         // 스탬프가 5개 이상일 때 상품 획득 알림
         if (userCourses.length >= 5) {
+          count.textContent = "";
+          count.textContent = "🎁상품 획득 완료!";
           const mission=document.querySelector(".mission")
           const alertShown = localStorage.getItem('alertShown');
           mission.style.display="block";

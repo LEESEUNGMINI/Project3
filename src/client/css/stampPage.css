@@ -2,9 +2,8 @@
   width: 100%;
   padding: 3%
 }
-.mission {
+#stapm_count {
   font-size: 15px;
-  display: none;
 }
 .profile {
   width: 128px;
