@@ -49,13 +49,14 @@ const loginFetch = async () => {
   const result = await response.json();
   console.log(result)
   if (result.status === "success") {
+    swal("성공", "로그인 되었습니다");
     localStorage.setItem("accessToken", result.data.accessToken);
-    alert("로그인 성공", "success");
+   
     setTimeout(() => {
       window.location.href = "/";
-    }, 50);
+    }, 300);
   } else {
-    alert("아이디와 비밀번호를 확인해주세요", "error");
+    swal("실패", "아이디와 비밀번호를 확인해주세요");
   }
 };
 

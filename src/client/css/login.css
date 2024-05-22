@@ -43,6 +43,10 @@ body {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+.swal-button{
+  justify-content: center;
+  display: flex;
+}
 #social-login a{
   text-decoration: none;
 }

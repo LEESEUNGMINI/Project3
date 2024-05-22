@@ -52,10 +52,13 @@
 
         const logOut = document.getElementById("logOut");
         logOut.addEventListener("click", () => {
+          swal("성공!","로그아웃 되었습니다")
           localStorage.removeItem('accessToken');
           localStorage.removeItem("userData"); // 사용자 데이터 제거
-          window.location.href = "./";
-          alert("로그아웃 성공");
+          setTimeout(() => {
+          window.location.href = "/";
+          
+        }, 1000)
         });
         } catch (error) {
           console.error("사용자 정보를 가져오는 중 오류 발생:", error);
