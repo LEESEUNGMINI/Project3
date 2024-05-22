@@ -177,7 +177,9 @@ async function fetchProfileImage() {
       console.error("이미지 없음");
   }
 };
-window.onload = fetchProfileImage;
+window.onload = function() {
+    fetchProfileImage();
+};
 
 // 프로필 이미지 변경
 selectImg.addEventListener("click", function(){
